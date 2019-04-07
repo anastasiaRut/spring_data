@@ -5,6 +5,12 @@ import org.hibernate.annotations.Proxy;
 import javax.persistence.*;
 import java.util.Set;
 
+/**
+ * The class represents a student entity
+ *
+ * @author A. Rutkouskaya
+ * @see User
+ */
 @Entity
 @Table(name = "students")
 @PrimaryKeyJoinColumn(name = "user_id")

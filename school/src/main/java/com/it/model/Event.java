@@ -1,11 +1,14 @@
 package com.it.model;
 
-import org.hibernate.annotations.Proxy;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Set;
 
+/**
+ * The class represents a language school event entity
+ *
+ * @author A. Rutkouskaya
+ */
 @Entity
 @Table(name = "events")
 public class Event {
@@ -20,6 +23,9 @@ public class Event {
     @Column
     private BigDecimal cost;
 
+    /**
+     * The value is used to describe how many free places are left
+     */
     @Column
     private Integer places;
 

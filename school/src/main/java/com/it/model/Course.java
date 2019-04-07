@@ -1,13 +1,13 @@
 package com.it.model;
 
-import org.hibernate.annotations.Proxy;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
 
 /**
- * 
+ * The class represents a language school course entity
+ *
+ * @author A. Rutkouskaya
  */
 @Entity
 @Table(name = "courses")
@@ -20,6 +20,9 @@ public class Course {
     @Column(name = "start_date")
     private LocalDate startDate;
 
+    /**
+     * The value is used to describe how many free places are left
+     */
     @Column
     private Short places;
 
