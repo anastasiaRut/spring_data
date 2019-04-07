@@ -18,6 +18,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+/**
+ * The configuration class
+ *
+ * @author A. Rutkouskaya
+ */
 @Configuration
 @PropertySource("classpath:database.properties")
 @ComponentScan("com.it")
@@ -39,6 +44,11 @@ public class AppConfiguration {
     private String password;
 
 
+    /**
+     * Creates MySQL connection
+     *
+     * @return DataSource
+     */
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource driver = new DriverManagerDataSource();
@@ -49,6 +59,11 @@ public class AppConfiguration {
         return driver;
     }
 
+    /**
+     * Sets properties for entity manager
+     *
+     * @return LocalContainerEntityManagerFactoryBean
+     */
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
@@ -60,6 +75,12 @@ public class AppConfiguration {
         return localContainerEntityManagerFactoryBean;
     }
 
+    /**
+     * Creates transaction manager
+     *
+     * @param emf - EntityManagerFactory
+     * @return PlatformTransactionManager
+     */
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
@@ -69,7 +90,7 @@ public class AppConfiguration {
 
     private Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        properties.setProperty("hibernate.hbm2ddl.auto", "create");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
         properties.setProperty("hibernate.enable_lazy_load_no_trans", "true");
         return properties;

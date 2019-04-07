@@ -14,6 +14,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * The  main class
+ *
+ * @author A. Rutkouskaya
+ */
 @Component
 public class Main {
     private static Main main;
@@ -38,6 +43,9 @@ public class Main {
     @Autowired
     private TypeOfCourseRepository typeOfCourseRepository;
 
+    /**
+     * The main method
+     */
     public static void main(String[] args) {
         AnnotationConfigApplicationContext annotatedClassApplicationContext = new AnnotationConfigApplicationContext(AppConfiguration.class);
         main = annotatedClassApplicationContext.getBean("main", Main.class);
@@ -51,8 +59,6 @@ public class Main {
         performEventsOperation();
         performCoursesOperation();
         performStudentCoursesOperation();
-        /*Optional<Language> language = main.getLanguageRepository().findById(1l);
-        language.ifPresent(System.out::println);*/
     }
 
     private static void performLanguageOperation() {
