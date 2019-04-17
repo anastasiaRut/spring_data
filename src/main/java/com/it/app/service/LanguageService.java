@@ -11,14 +11,14 @@ public interface LanguageService {
 
     void delete(Language entity);
 
-    Language getById(Long id);
+    Language getOne(Long id);
 
     Language editLanguage(Language language);
 
-    List<Language> getAll();
+    List<Language> findAll();
 
-    Language getLanguageWithTutors(String language);
+    Language findLanguageWithTutors(String language);
 
-    List<Language> getAllWithTutors();
+    List<Language> findAllWithTutors();
 
 }

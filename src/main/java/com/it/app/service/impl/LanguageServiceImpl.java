@@ -32,7 +32,7 @@ public class LanguageServiceImpl implements LanguageService {
     }
 
     @Override
-    public Language getById(Long id) {
+    public Language getOne(Long id) {
         return languageRepository.getOne(id);
     }
 
@@ -42,17 +42,17 @@ public class LanguageServiceImpl implements LanguageService {
     }
 
     @Override
-    public List<Language> getAll() {
+    public List<Language> findAll() {
         return languageRepository.findAll();
     }
 
     @Override
-    public Language getLanguageWithTutors(String language) {
+    public Language findLanguageWithTutors(String language) {
         return languageRepository.findLanguageWithTutors(language);
     }
 
     @Override
-    public List<Language> getAllWithTutors() {
+    public List<Language> findAllWithTutors() {
         return languageRepository.findAllWithTutors();
     }
 }
