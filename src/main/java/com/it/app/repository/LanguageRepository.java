@@ -33,4 +33,12 @@ public interface LanguageRepository extends JpaRepository<Language, Long> {
      */
     @Query("FROM Language language JOIN FETCH language.tutors")
     List<Language> findAllWithTutors();
+
+    /**
+     * Find out by name if this language exists
+     *
+     * @param languageName - name of language
+     * @return boolean
+     */
+    boolean existsByName(String languageName);
 }

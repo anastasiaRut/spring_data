@@ -4,9 +4,13 @@ import com.it.app.model.ScheduleMaker;
 import com.it.app.repository.ScheduleMakerRepository;
 import com.it.app.service.ScheduleMakerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
+@Transactional
 public class ScheduleMakerServiceImpl implements ScheduleMakerService {
     @Autowired
     ScheduleMakerRepository scheduleMakerRepository;

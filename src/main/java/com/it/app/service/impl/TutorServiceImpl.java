@@ -4,9 +4,13 @@ import com.it.app.model.Tutor;
 import com.it.app.repository.TutorRepository;
 import com.it.app.service.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
+@Transactional
 public class TutorServiceImpl implements TutorService {
     @Autowired
     TutorRepository tutorRepository;

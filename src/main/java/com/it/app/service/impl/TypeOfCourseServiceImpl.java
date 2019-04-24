@@ -4,9 +4,13 @@ import com.it.app.model.TypeOfCourse;
 import com.it.app.repository.TypeOfCourseRepository;
 import com.it.app.service.TypeOfCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
+@Transactional
 public class TypeOfCourseServiceImpl implements TypeOfCourseService {
 
     @Autowired

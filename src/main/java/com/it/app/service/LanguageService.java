@@ -5,7 +5,7 @@ import com.it.app.model.Language;
 import java.util.List;
 
 public interface LanguageService {
-    Language addLanguage(Language language);
+    Language save(Language language);
 
     void deleteById(Long id);
 
@@ -13,7 +13,9 @@ public interface LanguageService {
 
     Language getOne(Long id);
 
-    Language editLanguage(Language language);
+    Language findById(Long id);
+
+    Language update(Language language);
 
     List<Language> findAll();
 

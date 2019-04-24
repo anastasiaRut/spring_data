@@ -4,9 +4,13 @@ import com.it.app.model.Course;
 import com.it.app.repository.CourseRepository;
 import com.it.app.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
+@Transactional
 public class CourseServiceImpl implements CourseService {
     @Autowired
     CourseRepository courseRepository;

@@ -4,9 +4,13 @@ import com.it.app.model.Role;
 import com.it.app.repository.RoleRepository;
 import com.it.app.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
+@Transactional
 public class RoleServiceImpl implements RoleService {
     @Autowired
     RoleRepository roleRepository;

@@ -4,9 +4,13 @@ import com.it.app.model.Event;
 import com.it.app.repository.EventRepository;
 import com.it.app.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
+@Transactional
 public class EventServiceImpl implements EventService {
     @Autowired
     EventRepository eventRepository;
