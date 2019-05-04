@@ -29,4 +29,12 @@ public interface LevelRepository extends JpaRepository<Level, Long> {
      */
     @Query("FROM Level level JOIN FETCH level.tutors")
     List<Level> findAllWithTutors();
+
+    /**
+     * Find out by name if this level exists
+     *
+     * @param levelName - name of language
+     * @return boolean
+     */
+    boolean existsByName(String levelName);
 }

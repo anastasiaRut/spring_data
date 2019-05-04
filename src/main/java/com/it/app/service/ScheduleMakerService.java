@@ -1,11 +1,12 @@
 package com.it.app.service;
 
 import com.it.app.model.ScheduleMaker;
+import com.it.app.model.StudentCourse;
 
 import java.util.List;
 
 public interface ScheduleMakerService {
-    ScheduleMaker addScheduleMaker(ScheduleMaker scheduleMaker);
+    ScheduleMaker save(ScheduleMaker scheduleMaker);
 
     void deleteById(Long id);
 
@@ -13,9 +14,11 @@ public interface ScheduleMakerService {
 
     ScheduleMaker getOne(Long id);
 
-    ScheduleMaker editScheduleMaker(ScheduleMaker scheduleMaker);
+    ScheduleMaker update(ScheduleMaker scheduleMaker);
 
     List<ScheduleMaker> findAll();
+
+    ScheduleMaker findById(Long id);
 
     List<ScheduleMaker> findAllByLanguage(String language);
 

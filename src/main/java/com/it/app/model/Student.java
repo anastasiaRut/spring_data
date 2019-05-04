@@ -3,6 +3,7 @@ package com.it.app.model;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.util.Set;
 
 /**
@@ -17,9 +18,10 @@ import java.util.Set;
 public class Student extends User {
 
     @Column(name = "phone_number")
+    @Pattern(regexp = "^[+]375(29|33|25|44)[0-9]{7}$", message = "{student.phoneNumber.valid}")
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
     private Set<StudentCourse> studentCourses;
 
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)

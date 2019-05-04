@@ -1,6 +1,7 @@
 package com.it.app.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * The class represents notes about students on courses
@@ -16,10 +17,13 @@ public class StudentCourse {
     private Long id;
 
     @ManyToOne
+    @NotNull(message = "{studentCourse.student.notNull}")
+
     @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 
     @ManyToOne
+    @NotNull(message = "{studentCourse.course.notNull}")
     @JoinColumn(name = "course_id", nullable = false)
     private Course course;
 
@@ -28,6 +32,7 @@ public class StudentCourse {
      * If the status is true, the application is accepted by schedule maker
      */
     @Column(columnDefinition = "TINYINT")
+    @NotNull(message = "{studentCourse.status.notNull}")
     private Boolean status;
 
     public StudentCourse() {

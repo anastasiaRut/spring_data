@@ -1,5 +1,7 @@
 package com.it.app.config;
 
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +21,11 @@ public class WebConfiguration {
         viewResolver.setSuffix(".jsp");
 
         return viewResolver;
+    }
+
+    @Bean
+    public Mapper mapper() {
+        return new DozerBeanMapper();
     }
 
 }

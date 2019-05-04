@@ -5,7 +5,7 @@ import com.it.app.model.Course;
 import java.util.List;
 
 public interface CourseService {
-    Course addCourse(Course course);
+    Course save(Course course);
 
     void deleteById(Long id);
 
@@ -13,9 +13,11 @@ public interface CourseService {
 
     Course getOne(Long id);
 
-    Course editCourse(Course course);
+    Course update(Course course);
 
     List<Course> findAll();
+
+    Course findById(Long id);
 
     List<Course> findCoursesByLanguage(String language);
 

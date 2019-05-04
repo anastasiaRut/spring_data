@@ -16,7 +16,7 @@ public class EventServiceImpl implements EventService {
     EventRepository eventRepository;
 
     @Override
-    public Event addEvent(Event event) {
+    public Event save(Event event) {
         Event savedEvent = eventRepository.saveAndFlush(event);
         return savedEvent;
     }
@@ -37,13 +37,19 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event editEvent(Event event) {
+    public Event update(Event event) {
         return eventRepository.saveAndFlush(event);
     }
 
     @Override
     public List<Event> findAll() {
         return eventRepository.findAll();
+    }
+
+    @Override
+    public Event findById(Long id) {
+        //TODO
+        return null;
     }
 
     @Override

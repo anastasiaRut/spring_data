@@ -6,13 +6,17 @@ import java.util.List;
 
 public interface UserService {
 
+    User save(User user);
+
     void deleteById(Long id);
 
     void delete(User entity);
 
     User getOne(Long id);
 
-    User editUser(User user);
+    User update(User user);
+
+    User findById(Long id);
 
     List<User> findAll();
 

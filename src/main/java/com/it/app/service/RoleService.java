@@ -5,7 +5,7 @@ import com.it.app.model.Role;
 import java.util.List;
 
 public interface RoleService {
-    Role addRole(Role role);
+    Role save(Role role);
 
     void deleteById(Long id);
 
@@ -13,7 +13,9 @@ public interface RoleService {
 
     Role getOne(Long id);
 
-    Role editRole(Role role);
+    Role update(Role role);
+
+    Role findById(Long id);
 
     List<Role> findAll();
 

@@ -5,7 +5,7 @@ import com.it.app.model.Level;
 import java.util.List;
 
 public interface LevelService {
-    Level addLevel(Level level);
+    Level save(Level level);
 
     void deleteById(Long id);
 
@@ -13,7 +13,9 @@ public interface LevelService {
 
     Level getOne(Long id);
 
-    Level editLevel(Level level);
+    Level update(Level level);
+
+    Level findById(Long id);
 
     List<Level> findAll();
 

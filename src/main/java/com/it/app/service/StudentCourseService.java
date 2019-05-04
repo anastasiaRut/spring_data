@@ -5,7 +5,7 @@ import com.it.app.model.StudentCourse;
 import java.util.List;
 
 public interface StudentCourseService {
-    StudentCourse addStudentCourse(StudentCourse studentCourse);
+    StudentCourse save(StudentCourse studentCourse);
 
     void deleteById(Long id);
 
@@ -13,9 +13,18 @@ public interface StudentCourseService {
 
     StudentCourse getOne(Long id);
 
-    StudentCourse editStudentCourse(StudentCourse studentCourse);
+    StudentCourse update(StudentCourse studentCourse);
 
     List<StudentCourse> findAll();
 
+    StudentCourse findById(Long id);
+
+    boolean isEnrolled(Long courseId, Long studentId);
+
+    StudentCourse acceptApplication(Long studentCourseId);
+
     List<StudentCourse> findUnacceptedApplications();
+
+    StudentCourse enrollInCourse(Long courseId,  Long studentId);
+
 }

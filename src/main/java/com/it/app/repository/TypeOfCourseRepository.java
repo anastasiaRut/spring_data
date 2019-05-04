@@ -18,4 +18,12 @@ public interface TypeOfCourseRepository extends JpaRepository<TypeOfCourse, Long
      * @return TypeOfCourse
      */
     TypeOfCourse findByName(String name);
+
+    /**
+     * Find out by name if this type exists
+     *
+     * @param typeName - name of type
+     * @return boolean
+     */
+    boolean existsByName(String typeName);
 }

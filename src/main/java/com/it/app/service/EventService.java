@@ -5,7 +5,7 @@ import com.it.app.model.Event;
 import java.util.List;
 
 public interface EventService {
-    Event addEvent(Event event);
+    Event save(Event event);
 
     void deleteById(Long id);
 
@@ -13,9 +13,11 @@ public interface EventService {
 
     Event getOne(Long id);
 
-    Event editEvent(Event event);
+    Event update(Event event);
 
     List<Event> findAll();
+
+    Event findById(Long id);
 
     List<Event> sortEventsByCost();
 

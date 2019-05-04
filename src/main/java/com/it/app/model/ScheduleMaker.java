@@ -1,6 +1,7 @@
 package com.it.app.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * The class represents a schedule maker entity
@@ -14,6 +15,7 @@ import javax.persistence.*;
 public class ScheduleMaker extends User {
 
     @ManyToOne
+    @NotNull(message = "{scheduleMaker.language.notNull}")
     @JoinColumn(name = "language_id", nullable = false)
     private Language language;
 

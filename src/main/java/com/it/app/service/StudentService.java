@@ -1,11 +1,12 @@
 package com.it.app.service;
 
 import com.it.app.model.Student;
+import com.it.app.model.StudentCourse;
 
 import java.util.List;
 
 public interface StudentService {
-    Student addStudent(Student student);
+    Student save(Student student);
 
     void deleteById(Long id);
 
@@ -13,7 +14,9 @@ public interface StudentService {
 
     Student getOne(Long id);
 
-    Student editStudent(Student student);
+    Student update(Student student);
+
+    Student findById(Long id);
 
     List<Student> findAll();
 

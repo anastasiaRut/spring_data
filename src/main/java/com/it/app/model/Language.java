@@ -1,6 +1,9 @@
 package com.it.app.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 /**
@@ -16,6 +19,9 @@ public class Language {
     private Long id;
 
     @Column(name = "name", unique = true)
+    @NotNull(message = "{language.name.notNull}")
+    @NotEmpty(message = "{language.name.notEmpty}")
+    @Size(min = 3, max = 50, message = "{language.name.size}")
     private String name;
 
     @OneToMany(mappedBy = "language", fetch = FetchType.LAZY)

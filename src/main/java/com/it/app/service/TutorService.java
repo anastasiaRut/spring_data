@@ -5,7 +5,7 @@ import com.it.app.model.Tutor;
 import java.util.List;
 
 public interface TutorService {
-    Tutor addTutor(Tutor tutor);
+    Tutor save(Tutor tutor);
 
     void deleteById(Long id);
 
@@ -13,7 +13,9 @@ public interface TutorService {
 
     Tutor getOne(Long id);
 
-    Tutor editTutor(Tutor tutor);
+    Tutor update(Tutor tutor);
+
+    Tutor findById(Long id);
 
     List<Tutor> findAll();
 

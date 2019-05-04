@@ -5,7 +5,7 @@ import com.it.app.model.TypeOfCourse;
 import java.util.List;
 
 public interface TypeOfCourseService {
-    TypeOfCourse addTypeOfCourse(TypeOfCourse typeOfCourse);
+    TypeOfCourse save(TypeOfCourse typeOfCourse);
 
     void deleteById(Long id);
 
@@ -13,7 +13,9 @@ public interface TypeOfCourseService {
 
     TypeOfCourse getOne(Long id);
 
-    TypeOfCourse editTypeOfCourse(TypeOfCourse typeOfCourse);
+    TypeOfCourse findById(Long id);
+
+    TypeOfCourse update(TypeOfCourse typeOfCourse);
 
     List<TypeOfCourse> findAll();
 
