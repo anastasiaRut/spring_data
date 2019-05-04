@@ -3,7 +3,6 @@ package com.it.app.controller;
 import com.it.app.component.LocalizedMessageSource;
 import com.it.app.dto.request.CourseRequestDto;
 import com.it.app.dto.response.CourseResponseDto;
-import com.it.app.dto.response.CourseResponseDto;
 import com.it.app.model.*;
 import com.it.app.service.CourseService;
 import org.dozer.Mapper;

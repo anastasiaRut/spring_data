@@ -21,7 +21,7 @@ public class User {
 
    /* @NotNull(message = "{ user.username.notNull}")
     @NotEmpty(message = "{ user.username.notEmpty}")
-    @Size(min = 3, max = 50, message = "{ user.username.size}")*/
+    @Size(min = 3, max = 50, message = "{ user.username.size}")*/ //TODO Comments out
     @Column(name = "username", unique = true)
     private String username;
 
