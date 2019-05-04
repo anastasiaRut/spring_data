@@ -1,5 +1,7 @@
 package com.it.app.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -9,6 +11,7 @@ import javax.validation.constraints.NotNull;
  * @author A. Rutkouskaya
  */
 @Entity
+@Data
 @Table(name = "students_courses")
 public class StudentCourse {
 
@@ -34,40 +37,4 @@ public class StudentCourse {
     @Column(columnDefinition = "TINYINT")
     @NotNull(message = "{studentCourse.status.notNull}")
     private Boolean status;
-
-    public StudentCourse() {
-
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
 }

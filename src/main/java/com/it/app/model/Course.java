@@ -1,6 +1,7 @@
 package com.it.app.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.FutureOrPresent;
@@ -15,6 +16,7 @@ import java.util.Set;
  * @author A. Rutkouskaya
  */
 @Entity
+@Data
 @Table(name = "courses")
 public class Course {
 
@@ -57,80 +59,5 @@ public class Course {
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
     private Set<StudentCourse> studentCourses;
 
-    public Course() {
-    }
 
-    public Course(LocalDate startDate, Short places, Language language, TypeOfCourse typeOfCourse, Tutor tutor, Level level) {
-        this.startDate = startDate;
-        this.places = places;
-        this.language = language;
-        this.typeOfCourse = typeOfCourse;
-        this.tutor = tutor;
-        this.level = level;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public Short getPlaces() {
-        return places;
-    }
-
-    public void setPlaces(Short places) {
-        this.places = places;
-    }
-
-    public Language getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
-
-    public TypeOfCourse getTypeOfCourse() {
-        return typeOfCourse;
-    }
-
-    public void setTypeOfCourse(TypeOfCourse typeOfCourse) {
-        this.typeOfCourse = typeOfCourse;
-    }
-
-
-    public Set<StudentCourse> getStudentCourses() {
-        return studentCourses;
-    }
-
-    public void setStudentCourses(Set<StudentCourse> studentCourses) {
-        this.studentCourses = studentCourses;
-    }
-
-    public Tutor getTutor() {
-        return tutor;
-    }
-
-    public void setTutor(Tutor tutor) {
-        this.tutor = tutor;
-    }
-
-    public Level getLevel() {
-        return level;
-    }
-
-    public void setLevel(Level level) {
-        this.level = level;
-    }
 }

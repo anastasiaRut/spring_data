@@ -5,6 +5,7 @@ import com.it.app.dto.LanguageDto;
 import com.it.app.dto.LanguageDto;
 import com.it.app.model.Language;
 import com.it.app.service.LanguageService;
+import lombok.extern.slf4j.Slf4j;
 import org.dozer.Mapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,6 +50,7 @@ public class LanguageController {
     public ResponseEntity<LanguageDto> save(@Valid @RequestBody LanguageDto languageDto) {
         languageDto.setId(null);
         final LanguageDto responseLanguageDto = mapper.map(languageService.save(mapper.map(languageDto, Language.class)), LanguageDto.class);
+
         return new ResponseEntity<>(responseLanguageDto, HttpStatus.OK);
     }
 

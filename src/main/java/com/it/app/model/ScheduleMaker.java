@@ -1,5 +1,7 @@
 package com.it.app.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -10,6 +12,7 @@ import javax.validation.constraints.NotNull;
  * @see User
  */
 @Entity
+@Data
 @Table(name = "schedule_makers")
 @PrimaryKeyJoinColumn(name = "user_id")
 public class ScheduleMaker extends User {
@@ -18,12 +21,4 @@ public class ScheduleMaker extends User {
     @NotNull(message = "{scheduleMaker.language.notNull}")
     @JoinColumn(name = "language_id", nullable = false)
     private Language language;
-
-    public Language getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
 }
