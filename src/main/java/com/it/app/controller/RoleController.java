@@ -2,6 +2,7 @@ package com.it.app.controller;
 
 import com.it.app.component.LocalizedMessageSource;
 import com.it.app.dto.RoleDto;
+import com.it.app.dto.RoleDto;
 import com.it.app.model.Role;
 import com.it.app.service.RoleService;
 import org.dozer.Mapper;
@@ -38,6 +39,12 @@ public class RoleController {
                 .map((Role) -> mapper.map(Role, RoleDto.class))
                 .collect(Collectors.toList());
         return new ResponseEntity<>(roleDtoList, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<RoleDto> getOne(@PathVariable Long id) {
+        final RoleDto roleDto = mapper.map(roleService.findById(id), RoleDto.class);
+        return new ResponseEntity<>(roleDto, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)

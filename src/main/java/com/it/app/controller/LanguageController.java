@@ -2,6 +2,7 @@ package com.it.app.controller;
 
 import com.it.app.component.LocalizedMessageSource;
 import com.it.app.dto.LanguageDto;
+import com.it.app.dto.LanguageDto;
 import com.it.app.model.Language;
 import com.it.app.service.LanguageService;
 import org.dozer.Mapper;
@@ -36,6 +37,12 @@ public class LanguageController {
                 .map((Language) -> mapper.map(Language, LanguageDto.class))
                 .collect(Collectors.toList());
         return new ResponseEntity<>(languageDtoList, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<LanguageDto> getOne(@PathVariable Long id) {
+        final LanguageDto languageDto = mapper.map(languageService.findById(id), LanguageDto.class);
+        return new ResponseEntity<>(languageDto, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)

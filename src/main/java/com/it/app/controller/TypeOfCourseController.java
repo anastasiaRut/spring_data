@@ -38,6 +38,12 @@ public class TypeOfCourseController {
         return new ResponseEntity<>(typeOfCourseDtoList, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<TypeOfCourseDto> getOne(@PathVariable Long id) {
+        final TypeOfCourseDto typeOfCourseDto = mapper.map(typeOfCourseService.findById(id), TypeOfCourseDto.class);
+        return new ResponseEntity<>(typeOfCourseDto, HttpStatus.OK);
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<TypeOfCourseDto> save(@Valid @RequestBody TypeOfCourseDto typeOfCourseDto) {
         typeOfCourseDto.setId(null);

@@ -3,6 +3,7 @@ package com.it.app.controller;
 import com.it.app.component.LocalizedMessageSource;
 import com.it.app.dto.request.CourseRequestDto;
 import com.it.app.dto.response.CourseResponseDto;
+import com.it.app.dto.response.CourseResponseDto;
 import com.it.app.model.*;
 import com.it.app.service.CourseService;
 import org.dozer.Mapper;
@@ -38,6 +39,12 @@ public class CourseController {
         courses.stream()
                 .forEach((Course) -> courseDtoList.add(getCourseDto(Course)));
         return new ResponseEntity<>(courseDtoList, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<CourseResponseDto> getOne(@PathVariable Long id) {
+        final CourseResponseDto courseResponseDto = getCourseDto(courseService.findById(id));
+        return new ResponseEntity<>(courseResponseDto, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)

@@ -3,6 +3,7 @@ package com.it.app.controller;
 import com.it.app.component.LocalizedMessageSource;
 import com.it.app.dto.request.ScheduleMakerRequestDto;
 import com.it.app.dto.response.ScheduleMakerResponseDto;
+import com.it.app.dto.response.ScheduleMakerResponseDto;
 import com.it.app.model.Language;
 import com.it.app.model.Role;
 import com.it.app.model.ScheduleMaker;
@@ -41,6 +42,12 @@ public class ScheduleMakerController {
                 .forEach((ScheduleMaker) -> scheduleMakerDtoList.add(getScheduleMakerDto(ScheduleMaker)));
 
         return new ResponseEntity<>(scheduleMakerDtoList, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<ScheduleMakerResponseDto> getOne(@PathVariable Long id) {
+        final ScheduleMakerResponseDto scheduleMakerResponseDto = getScheduleMakerDto(scheduleMakerService.findById(id));
+        return new ResponseEntity<>(scheduleMakerResponseDto, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)

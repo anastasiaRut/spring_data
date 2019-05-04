@@ -3,6 +3,7 @@ package com.it.app.controller;
 import com.it.app.component.LocalizedMessageSource;
 import com.it.app.dto.request.StudentRequestDto;
 import com.it.app.dto.response.StudentResponseDto;
+import com.it.app.dto.response.StudentResponseDto;
 import com.it.app.model.Role;
 import com.it.app.model.Student;
 import com.it.app.service.StudentService;
@@ -40,6 +41,12 @@ public class StudentController {
                 .forEach((Student) -> studentDtoList.add(getStudentDto(Student)));
 
         return new ResponseEntity<>(studentDtoList, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<StudentResponseDto> getOne(@PathVariable Long id) {
+        final StudentResponseDto studentResponseDto = getStudentDto(studentService.findById(id));
+        return new ResponseEntity<>(studentResponseDto, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)

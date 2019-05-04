@@ -38,14 +38,20 @@ public class StudentCourseController {
         final List<StudentCourse> studentCourses = studentCourseService.findAll();
         final List<StudentCourseResponseDto> studentCourseDtoList = new ArrayList<>();
         studentCourses.stream()
-                .forEach((StudentCourse) -> studentCourseDtoList.add(getStudentDto(StudentCourse)));
+                .forEach((StudentCourse) -> studentCourseDtoList.add(getStudentCourseDto(StudentCourse)));
         return new ResponseEntity<>(studentCourseDtoList, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<StudentCourseResponseDto> getOne(@PathVariable Long id) {
+        final StudentCourseResponseDto studentCourseResponseDto = getStudentCourseDto(studentCourseService.findById(id));
+        return new ResponseEntity<>(studentCourseResponseDto, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<StudentCourseResponseDto> save(@Valid @RequestBody StudentCourseRequestDto studentCourseRequestDto) {
         studentCourseRequestDto.setId(null);
-        final StudentCourseResponseDto studentCourseResponseDto = getStudentDto(studentCourseService.save(getStudentCourse(studentCourseRequestDto)));
+        final StudentCourseResponseDto studentCourseResponseDto = getStudentCourseDto(studentCourseService.save(getStudentCourse(studentCourseRequestDto)));
         return new ResponseEntity<>(studentCourseResponseDto, HttpStatus.OK);
     }
 
@@ -54,7 +60,7 @@ public class StudentCourseController {
         if (!Objects.equals(id, studentCourseRequestDto.getId())) {
             throw new RuntimeException(localizedMessageSource.getMessage("controller.studentCourse.unexpectedId", new Object[]{}));
         }
-        final StudentCourseResponseDto studentCourseResponseDto = getStudentDto(studentCourseService.update(getStudentCourse(studentCourseRequestDto)));
+        final StudentCourseResponseDto studentCourseResponseDto = getStudentCourseDto(studentCourseService.update(getStudentCourse(studentCourseRequestDto)));
         return new ResponseEntity<>(studentCourseResponseDto, HttpStatus.OK);
     }
 
@@ -69,7 +75,7 @@ public class StudentCourseController {
     public ResponseEntity<StudentCourseResponseDto> enroll(@Valid @RequestBody StudentCourseRequestDto studentCourseRequestDto) {
         studentCourseRequestDto.setId(null);
         StudentCourse studentCourse = getStudentCourse(studentCourseRequestDto);
-        final StudentCourseResponseDto studentCourseResponseDto = getStudentDto(studentCourseService.enrollInCourse(studentCourse.getCourse().getId(), studentCourse.getStudent().getId()));
+        final StudentCourseResponseDto studentCourseResponseDto = getStudentCourseDto(studentCourseService.enrollInCourse(studentCourse.getCourse().getId(), studentCourse.getStudent().getId()));
         return new ResponseEntity<>(studentCourseResponseDto, HttpStatus.OK);
     }
 
@@ -78,13 +84,13 @@ public class StudentCourseController {
         final List<StudentCourse> studentCourses = studentCourseService.findUnacceptedApplications();
         final List<StudentCourseResponseDto> studentCourseDtoList = new ArrayList<>();
         studentCourses.stream()
-                .forEach((StudentCourse) -> studentCourseDtoList.add(getStudentDto(StudentCourse)));
+                .forEach((StudentCourse) -> studentCourseDtoList.add(getStudentCourseDto(StudentCourse)));
         return new ResponseEntity<>(studentCourseDtoList, HttpStatus.OK);
     }
 
     @RequestMapping(value = "accept/{id}", method = RequestMethod.PUT)
     public ResponseEntity<StudentCourseResponseDto> accept(@PathVariable Long id) {
-        final StudentCourseResponseDto studentCourseResponseDto = getStudentDto(studentCourseService.acceptApplication(id));
+        final StudentCourseResponseDto studentCourseResponseDto = getStudentCourseDto(studentCourseService.acceptApplication(id));
         return new ResponseEntity<>(studentCourseResponseDto, HttpStatus.OK);
 
     }
@@ -101,7 +107,7 @@ public class StudentCourseController {
         return studentCourse;
     }
 
-    private StudentCourseResponseDto getStudentDto(StudentCourse studentCourse) {
+    private StudentCourseResponseDto getStudentCourseDto(StudentCourse studentCourse) {
         final StudentCourseResponseDto studentResponseDto = mapper.map(studentCourse, StudentCourseResponseDto.class);
         studentResponseDto.setCourseid(studentCourse.getCourse().getId());
         studentResponseDto.setStudentid(studentCourse.getStudent().getId());

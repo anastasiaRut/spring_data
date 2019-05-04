@@ -3,6 +3,7 @@ package com.it.app.controller;
 import com.it.app.component.LocalizedMessageSource;
 import com.it.app.dto.request.TutorRequestDto;
 import com.it.app.dto.response.TutorResponseDto;
+import com.it.app.dto.response.TutorResponseDto;
 import com.it.app.model.Language;
 import com.it.app.model.Level;
 import com.it.app.model.Tutor;
@@ -37,6 +38,12 @@ public class TutorController {
         tutors.stream()
                 .forEach((Tutor) -> tutorDtoList.add(getTutorDto(Tutor)));
         return new ResponseEntity<>(tutorDtoList, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<TutorResponseDto> getOne(@PathVariable Long id) {
+        final TutorResponseDto tutorResponseDto = getTutorDto(tutorService.findById(id));
+        return new ResponseEntity<>(tutorResponseDto, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)

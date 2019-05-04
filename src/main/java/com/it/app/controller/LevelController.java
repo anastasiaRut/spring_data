@@ -2,6 +2,7 @@ package com.it.app.controller;
 
 import com.it.app.component.LocalizedMessageSource;
 import com.it.app.dto.LevelDto;
+import com.it.app.dto.LevelDto;
 import com.it.app.model.Level;
 import com.it.app.service.LevelService;
 import org.dozer.Mapper;
@@ -36,6 +37,12 @@ public class LevelController {
                 .map((Level) -> mapper.map(Level, LevelDto.class))
                 .collect(Collectors.toList());
         return new ResponseEntity<>(levelDtoList, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<LevelDto> getOne(@PathVariable Long id) {
+        final LevelDto levelDto = mapper.map(levelService.findById(id), LevelDto.class);
+        return new ResponseEntity<>(levelDto, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
