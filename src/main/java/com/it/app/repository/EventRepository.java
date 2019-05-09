@@ -32,5 +32,4 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     @Query("FROM Event event JOIN FETCH event.students")
     List<Event> findEventsWithStudents();
 
-
 }

@@ -1,6 +1,9 @@
 package com.it.app.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -17,7 +20,9 @@ import java.util.Set;
  * @see Course
  */
 @Entity
-@Data
+@Getter
+@Setter
+@ToString(exclude={"courses"})
 @Table(name = "types")
 public class TypeOfCourse {
 

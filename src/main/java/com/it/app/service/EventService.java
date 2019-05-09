@@ -17,6 +17,10 @@ public interface EventService {
 
     List<Event> findAll();
 
+    Event enrollInEvent(Long eventId, Long studentId);
+
+    boolean isEnrolled(Long courseId, Long studentId);
+
     Event findById(Long id);
 
     List<Event> sortEventsByCost();

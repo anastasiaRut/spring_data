@@ -1,6 +1,9 @@
 package com.it.app.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,7 +14,8 @@ import javax.validation.constraints.NotNull;
  * @author A. Rutkouskaya
  */
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "students_courses")
 public class StudentCourse {
 

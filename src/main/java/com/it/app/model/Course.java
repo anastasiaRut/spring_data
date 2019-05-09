@@ -1,7 +1,11 @@
 package com.it.app.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.FutureOrPresent;
@@ -16,7 +20,8 @@ import java.util.Set;
  * @author A. Rutkouskaya
  */
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "courses")
 public class Course {
 
@@ -26,7 +31,6 @@ public class Course {
 
     @Column(name = "start_date")
     @FutureOrPresent(message = "{course.startDate.futureOrPresent}")
-    @JsonFormat(pattern = "10.04.2019") //TODO converting
     private LocalDate startDate;
 
     /**

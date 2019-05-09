@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class CourseResponseDto {
     private Long id;
-    private LocalDate startDate;
+    private String startDate;
     private Long levelId;
     private Long languageId;
     private Long tutorId;

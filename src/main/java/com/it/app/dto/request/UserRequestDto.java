@@ -17,6 +17,11 @@ public class UserRequestDto {
     @Size(min = 3, max = 50, message = "{user.name.size}")
     private String name;
 
+    @NotNull(message = "{user.password.notNull}")
+    @NotEmpty(message = "{user.password.notEmpty}")
+    @Size(min = 3, max = 50, message = "{user.password.size}")
+    private String password;
+
     @NotNull(message = "{user.role.notNull}")
     private Long roleId;
 }

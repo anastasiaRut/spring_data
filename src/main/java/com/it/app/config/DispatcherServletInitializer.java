@@ -1,6 +1,9 @@
 package com.it.app.config;
 
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import javax.servlet.Filter;
 
 public class DispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -17,6 +20,13 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/"};
+    }
+
+    @Override
+    protected Filter[] getServletFilters() {
+        DelegatingFilterProxy delegateFilterProxy = new DelegatingFilterProxy();
+        delegateFilterProxy.setTargetBeanName("springSecurityFilterChain");
+        return new Filter[]{delegateFilterProxy};
     }
 
 }

@@ -2,12 +2,14 @@ package com.it.app.service.impl;
 
 import com.it.app.component.LocalizedMessageSource;
 import com.it.app.model.Course;
+import com.it.app.model.Level;
 import com.it.app.repository.CourseRepository;
 import com.it.app.service.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -94,15 +96,22 @@ public class CourseServiceImpl implements CourseService {
     private Course saveAndFlush(Course course) {
         validate(course.getLanguage() == null || course.getLanguage().getId() == null, localizedMessageSource.getMessage("error.course.language.isNull", new Object[]{}));
         course.setLanguage(languageService.findById(course.getLanguage().getId()));
-
         validate(course.getLevel() == null || course.getLevel().getId() == null, localizedMessageSource.getMessage("error.course.level.isNull", new Object[]{}));
         course.setLevel(levelService.findById(course.getLevel().getId()));
-
-        validate(course.getTypeOfCourse() == null || course.getTypeOfCourse().getId() == null, localizedMessageSource.getMessage("error.course.typeOfCourse.isNull", new Object[]{}));
-        course.setTypeOfCourse(typeOfCourseService.findById(course.getTypeOfCourse().getId()));
-
         validate(course.getTutor() == null || course.getTutor().getId() == null, localizedMessageSource.getMessage("error.course.tutor.isNull", new Object[]{}));
         course.setTutor(tutorService.findById(course.getTutor().getId()));
+        Set<Level> levels = course.getTutor().getLevels();
+        boolean levelOfTutor = false;
+        for (Level level : levels) {
+            if (level.getId() == course.getLevel().getId()) {
+                levelOfTutor = true;
+                break;
+            }
+        }
+        validate(!levelOfTutor, localizedMessageSource.getMessage("error.course.level.notOfThisTutor", new Object[]{}));
+        validate(course.getTutor().getLanguage().getId() != course.getLanguage().getId(), localizedMessageSource.getMessage("error.course.language.notOfThisTutor", new Object[]{}));
+        validate(course.getTypeOfCourse() == null || course.getTypeOfCourse().getId() == null, localizedMessageSource.getMessage("error.course.typeOfCourse.isNull", new Object[]{}));
+        course.setTypeOfCourse(typeOfCourseService.findById(course.getTypeOfCourse().getId()));
 
         return courseRepository.saveAndFlush(course);
     }

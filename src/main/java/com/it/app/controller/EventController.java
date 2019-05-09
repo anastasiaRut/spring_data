@@ -63,6 +63,12 @@ public class EventController {
         return new ResponseEntity<>(eventResponseDto, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/enroll", method = RequestMethod.PUT)
+    public ResponseEntity<EventResponseDto> enroll(@RequestParam Long studentId, @RequestParam Long eventId) {
+        final EventResponseDto eventResponseDto = getEventDto(eventService.enrollInEvent(studentId, eventId));
+        return new ResponseEntity<>(eventResponseDto, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {

@@ -1,6 +1,10 @@
 package com.it.app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -14,7 +18,8 @@ import java.util.Set;
  * @author A. Rutkouskaya
  */
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "levels")
 public class Level {
     @Id

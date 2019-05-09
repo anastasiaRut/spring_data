@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(User user) {
         validate(user.getId() != null, localizedMessageSource.getMessage("error.user.notHaveId", new Object[]{}));
-        validate(userRepository.existsByUsername(user.getUsername()), localizedMessageSource.getMessage("error.user.name.notUnique", new Object[]{}));
+        validate(userRepository.existsByUsername(user.getUsername()), localizedMessageSource.getMessage("error.user.username.notUnique", new Object[]{}));
         return saveAndFlush(user);
     }
 

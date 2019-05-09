@@ -25,6 +25,6 @@ public interface StudentCourseService {
 
     List<StudentCourse> findUnacceptedApplications();
 
-    StudentCourse enrollInCourse(Long courseId,  Long studentId);
+    StudentCourse enrollInCourse(Long courseId, Long studentId);
 
 }

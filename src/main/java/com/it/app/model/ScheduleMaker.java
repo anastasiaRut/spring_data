@@ -1,6 +1,9 @@
 package com.it.app.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,7 +15,8 @@ import javax.validation.constraints.NotNull;
  * @see User
  */
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "schedule_makers")
 @PrimaryKeyJoinColumn(name = "user_id")
 public class ScheduleMaker extends User {

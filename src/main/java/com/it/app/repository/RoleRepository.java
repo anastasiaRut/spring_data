@@ -42,4 +42,13 @@ public interface RoleRepository extends JpaRepository<Role, Long> {
      */
     boolean existsByName(String roleName);
 
+    /**
+     * Find Role by name
+     * JPA QL implementation
+     *
+     * @param roleName - name of Role
+     * @return Role
+     */
+    Role findByName(String roleName);
+
 }

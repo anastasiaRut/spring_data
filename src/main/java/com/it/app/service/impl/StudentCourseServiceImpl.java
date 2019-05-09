@@ -88,6 +88,10 @@ public class StudentCourseServiceImpl implements StudentCourseService {
     public StudentCourse acceptApplication(Long studentCourseId) {
         StudentCourse studentCourse = findById(studentCourseId);
         studentCourse.setStatus(true);
+        Course course = courseService.findById(studentCourse.getCourse().getId());
+        short places = course.getPlaces();
+        course.setPlaces(--places);
+        courseService.update(course);
         return update(studentCourse);
     }
 
@@ -101,6 +105,7 @@ public class StudentCourseServiceImpl implements StudentCourseService {
         Student student = studentService.findById(studentId);
         Course course = courseService.findById(courseId);
         validate(isEnrolled(courseId, studentId), localizedMessageSource.getMessage("error.student.isEnrolled", new Object[]{}));
+        validate(course.getPlaces()==0, localizedMessageSource.getMessage("error.course.isFull", new Object[]{}));
         StudentCourse studentCourse = new StudentCourse();
         studentCourse.setStatus(false);
         studentCourse.setStudent(student);

@@ -1,6 +1,9 @@
 package com.it.app.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
@@ -14,7 +17,8 @@ import java.util.Set;
  * @see User
  */
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "students")
 @PrimaryKeyJoinColumn(name = "user_id")
 public class Student extends User {

@@ -1,15 +1,18 @@
 package com.it.app.service.impl;
 
 import com.it.app.component.LocalizedMessageSource;
-import com.it.app.model.Course;
 import com.it.app.model.Event;
+import com.it.app.model.Student;
 import com.it.app.repository.EventRepository;
 import com.it.app.service.EventService;
+import com.it.app.service.StudentService;
 import com.it.app.service.TutorService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -20,10 +23,13 @@ public class EventServiceImpl implements EventService {
 
     private final TutorService tutorService;
 
-    public EventServiceImpl(EventRepository eventRepository, LocalizedMessageSource localizedMessageSource, TutorService tutorService) {
+    private final StudentService studentService;
+
+    public EventServiceImpl(EventRepository eventRepository, LocalizedMessageSource localizedMessageSource, TutorService tutorService, StudentService studentService) {
         this.eventRepository = eventRepository;
         this.localizedMessageSource = localizedMessageSource;
         this.tutorService = tutorService;
+        this.studentService = studentService;
     }
 
     @Override
@@ -61,6 +67,35 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<Event> findAll() {
         return eventRepository.findAll();
+    }
+
+    @Override
+    public boolean isEnrolled(Long eventId, Long studentId) {
+        Student student = studentService.findById(studentId);
+        Set<Event> events = student.getEvents();
+        if (events != null) {
+            for (Event event : events) {
+                if (event.getId() == eventId)
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public Event enrollInEvent(Long eventId, Long studentId) {
+        Event event = findById(eventId);
+        Student student = studentService.findById(studentId);
+        validate(isEnrolled(eventId, studentId), localizedMessageSource.getMessage("error.student.isEnrolled", new Object[]{}));
+        validate(event.getPlaces() == 0, localizedMessageSource.getMessage("error.event.isFull", new Object[]{}));
+        Set<Event> events = student.getEvents();
+        if (events == null)
+            events = new HashSet<>();
+        events.add(event);
+        student.setEvents(events);
+        studentService.update(student);
+        event.setPlaces(event.getPlaces()-1);
+        return update(event);
     }
 
     @Override

@@ -1,8 +1,12 @@
 package com.it.app.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -14,40 +18,41 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "users")
-@Data
+@Getter
+@Setter
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    /* @NotNull(message = "{ user.username.notNull}")
+     @NotNull(message = "{ user.username.notNull}")
      @NotEmpty(message = "{ user.username.notEmpty}")
-     @Size(min = 3, max = 50, message = "{ user.username.size}")*/ //TODO Comments out
+     @Size(min = 3, max = 50, message = "{ user.username.size}")
     @Column(name = "username", unique = true)
     private String username;
 
-    /*@NotNull(message = "{ user.password.notNull}")
+    @NotNull(message = "{ user.password.notNull}")
     @NotEmpty(message = "{ user.password.notEmpty}")
-    @Size(min = 3, max = 50, message = "{ user.password.size}")*/
+    @Size(min = 3, max = 100, message = "{ user.password.size}")
     @Column(name = "password")
     private String password;
 
-    @NotNull(message = "{ user.name.notNull}")
-    @NotEmpty(message = "{ user.name.notEmpty}")
+    /*@NotNull(message = "{ user.name.notNull}")
+    @NotEmpty(message = "{ user.name.notEmpty}")*/
     @Size(min = 3, max = 50, message = "{ user.name.size}")
     @Column(name = "name")
     private String name;
 
-    /*@NotNull(message = "{ user.surname.notNull}")
-    @NotEmpty(message = "{ user.surname.notEmpty}")
-    @Size(min = 3, max = 50, message = "{ user.surname.size}")*/
+   /* @NotNull(message = "{ user.surname.notNull}")
+    @NotEmpty(message = "{ user.surname.notEmpty}")*/
+    @Size(min = 3, max = 50, message = "{ user.surname.size}")
     @Column(name = "surname")
     private String surname;
 
     /*@NotNull(message = "{ user.email.notNull}")
-    @NotEmpty(message = "{ user.email.notEmpty}")
-    @Email(message = "{{ user.email.valid}")*/
+    @NotEmpty(message = "{ user.email.notEmpty}")*/
+    @Email(message = "{{ user.email.valid}")
     @Column(name = "email", unique = true)
     private String email;
 

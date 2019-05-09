@@ -1,6 +1,6 @@
 package com.it.app.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -14,7 +14,8 @@ import java.util.Set;
  * @author A. Rutkouskaya
  */
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "roles")
 public class Role {
     @Id
@@ -29,4 +30,5 @@ public class Role {
 
     @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
     private Set<User> users;
+
 }

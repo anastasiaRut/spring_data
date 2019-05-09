@@ -21,8 +21,6 @@ public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
 
-   // private final EventService eventService;
-
     private final RoleService roleService;
 
     public StudentServiceImpl(LocalizedMessageSource localizedMessageSource, StudentRepository studentRepository, RoleService roleService) {
@@ -88,15 +86,6 @@ public class StudentServiceImpl implements StudentService {
     private Student saveAndFlush(Student student) {
         validate(student.getRole() == null || student.getRole().getId() == null, localizedMessageSource.getMessage("error.student.role.isNull", new Object[]{}));
         student.setRole(roleService.findById(student.getRole().getId()));
-        /*Set<Event> eventsId = student.getEvents();
-        if (eventsId != null) {
-            Set<Event> events = new HashSet<>();
-            for (Event event : eventsId) {
-                events.add(eventService.findById(event.getId()));
-
-            }
-            student.setEvents(events);
-        }*/
 
         return studentRepository.saveAndFlush(student);
     }

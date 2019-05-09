@@ -14,9 +14,7 @@ import java.time.LocalDate;
 public class CourseRequestDto {
     private Long id;
 
-    @FutureOrPresent(message = "{course.startDate.futureOrPresent}")
-    @JsonFormat(pattern = "10.04.2019")
-    private LocalDate startDate;
+    private String startDate;
 
     @NotNull(message = "{course.level.notNull}")
     private Long levelId;
