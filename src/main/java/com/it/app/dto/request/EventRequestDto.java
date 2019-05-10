@@ -9,6 +9,9 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 
+/**
+ * Request Data Transfer Object class for Event entity
+ */
 @Getter
 @Setter
 public class EventRequestDto {
@@ -16,7 +19,7 @@ public class EventRequestDto {
     private Long id;
 
     @NotNull(message = "{event.name.notNull}")
-    @NotEmpty(message = "{ event.name.notEmpty}")
+    @NotEmpty(message = "{event.name.notEmpty}")
     private String name;
 
     @NotNull(message = "{event.cost.notNull}")

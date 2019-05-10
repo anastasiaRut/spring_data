@@ -26,7 +26,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
      * Creates Bean from AuthenticationManager that processes an authentication request
      *
      * @return - AuthenticationManager
-     * @throws Exception
      */
     @Bean
     @Override
@@ -34,6 +33,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    /**
+     * Gets encoder for encoding passwords
+     * @return
+     */
     @Bean
     PasswordEncoder getEncoder() {
         return new BCryptPasswordEncoder();

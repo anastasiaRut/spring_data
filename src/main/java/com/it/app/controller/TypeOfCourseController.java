@@ -3,6 +3,7 @@ package com.it.app.controller;
 import com.it.app.component.LocalizedMessageSource;
 import com.it.app.dto.TypeOfCourseDto;
 import com.it.app.model.TypeOfCourse;
+import com.it.app.model.TypeOfCourse;
 import com.it.app.service.TypeOfCourseService;
 import org.dozer.Mapper;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * The class represents a REST Controller for TypeOfCourse entity
+ *
+ * @author A. Rutkouskaya
+ * @see TypeOfCourse
+ */
 @RestController
 @RequestMapping("/types")
 public class TypeOfCourseController {
@@ -28,7 +35,11 @@ public class TypeOfCourseController {
         this.typeOfCourseService = typeOfCourseService;
         this.localizedMessageSource = localizedMessageSource;
     }
-
+    /**
+     * Gets all TypeOfCourses
+     *
+     * @return ResponseEntity<List<TypeOfCourseResponseDto>>
+     */
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<TypeOfCourseDto>> getAll() {
         final List<TypeOfCourse> typeOfCourses = typeOfCourseService.findAll();
@@ -37,13 +48,24 @@ public class TypeOfCourseController {
                 .collect(Collectors.toList());
         return new ResponseEntity<>(typeOfCourseDtoList, HttpStatus.OK);
     }
-
+    /**
+     * Gets one TypeOfCourse
+     *
+     * @param id -id
+     * @return ResponseEntity<TypeOfCourseResponseDto>
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<TypeOfCourseDto> getOne(@PathVariable Long id) {
         final TypeOfCourseDto typeOfCourseDto = mapper.map(typeOfCourseService.findById(id), TypeOfCourseDto.class);
         return new ResponseEntity<>(typeOfCourseDto, HttpStatus.OK);
     }
 
+    /**
+     * Saves TypeOfCourse
+     *
+     * @param typeOfCourseDto - typeOfCourseRequestDto
+     * @return ResponseEntity<TypeOfCourseResponseDto>
+     */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<TypeOfCourseDto> save(@Valid @RequestBody TypeOfCourseDto typeOfCourseDto) {
         typeOfCourseDto.setId(null);
@@ -51,6 +73,12 @@ public class TypeOfCourseController {
         return new ResponseEntity<>(responseTypeOfCourseDto, HttpStatus.OK);
     }
 
+    /**
+     * Updates TypeOfCourse
+     *
+     * @param typeOfCourseDto - typeOfCourseRequestDto
+     * @return ResponseEntity<TypeOfCourseResponseDto>
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<TypeOfCourseDto> update(@Valid @RequestBody TypeOfCourseDto typeOfCourseDto, @PathVariable Long id) {
         if (!Objects.equals(id, typeOfCourseDto.getId())) {
@@ -59,7 +87,11 @@ public class TypeOfCourseController {
         final TypeOfCourseDto responseTypeOfCourseDto = mapper.map(typeOfCourseService.update(mapper.map(typeOfCourseDto, TypeOfCourse.class)), TypeOfCourseDto.class);
         return new ResponseEntity<>(responseTypeOfCourseDto, HttpStatus.OK);
     }
-
+    /**
+     * Deletes TypeOfCourse
+     *
+     * @param id - id
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {

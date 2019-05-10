@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Response Data Transfer Object class for StudentCourse entity
+ */
 @Getter
 @Setter
 @NoArgsConstructor

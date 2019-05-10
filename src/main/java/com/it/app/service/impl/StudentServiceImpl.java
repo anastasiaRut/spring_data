@@ -1,19 +1,20 @@
 package com.it.app.service.impl;
 
 import com.it.app.component.LocalizedMessageSource;
-import com.it.app.model.Course;
-import com.it.app.model.Event;
 import com.it.app.model.Student;
-import com.it.app.model.StudentCourse;
 import com.it.app.repository.StudentRepository;
-import com.it.app.service.*;
+import com.it.app.service.RoleService;
+import com.it.app.service.StudentService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
+/**
+ * The class represents a Implementation of StudentService interface
+ *
+ * @author A. Rutkouskaya
+ */
 @Service
 @Transactional
 public class StudentServiceImpl implements StudentService {

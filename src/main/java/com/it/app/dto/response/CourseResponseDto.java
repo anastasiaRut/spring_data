@@ -6,6 +6,9 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
+/**
+ * Response Data Transfer Object class for Course entity
+ */
 @Getter
 @Setter
 @NoArgsConstructor

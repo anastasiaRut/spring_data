@@ -14,6 +14,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * The class represents a Implementation of TutorService interface
+ *
+ * @author A. Rutkouskaya
+ */
 @Service
 @Transactional
 public class TutorServiceImpl implements TutorService {

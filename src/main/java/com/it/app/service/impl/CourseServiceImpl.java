@@ -11,6 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * The class represents a Implementation of CourseService interface
+ *
+ * @author A. Rutkouskaya
+ */
 @Service
 @Transactional
 public class CourseServiceImpl implements CourseService {

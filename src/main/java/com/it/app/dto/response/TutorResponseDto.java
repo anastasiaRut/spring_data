@@ -7,6 +7,9 @@ import lombok.Setter;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Response Data Transfer Object class for Tutor entity
+ */
 @Getter
 @Setter
 @NoArgsConstructor

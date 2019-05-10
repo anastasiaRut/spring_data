@@ -3,7 +3,6 @@ package com.it.app.controller;
 import com.it.app.component.LocalizedMessageSource;
 import com.it.app.dto.request.StudentRequestDto;
 import com.it.app.dto.response.StudentResponseDto;
-import com.it.app.dto.response.StudentResponseDto;
 import com.it.app.model.Role;
 import com.it.app.model.Student;
 import com.it.app.service.StudentService;
@@ -17,6 +16,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The class represents a REST Controller for Student entity
+ *
+ * @author A. Rutkouskaya
+ * @see Student
+ */
 @RestController
 @RequestMapping("/students")
 public class StudentController {
@@ -33,6 +38,11 @@ public class StudentController {
         this.localizedMessageSource = localizedMessageSource;
     }
 
+    /**
+     * Gets all Students
+     *
+     * @return ResponseEntity<List<StudentResponseDto>>
+     */
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<StudentResponseDto>> getAll() {
         final List<Student> students = studentService.findAll();
@@ -43,12 +53,24 @@ public class StudentController {
         return new ResponseEntity<>(studentDtoList, HttpStatus.OK);
     }
 
+    /**
+     * Gets one Student
+     *
+     * @param id -id
+     * @return ResponseEntity<StudentResponseDto>
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<StudentResponseDto> getOne(@PathVariable Long id) {
         final StudentResponseDto studentResponseDto = getStudentDto(studentService.findById(id));
         return new ResponseEntity<>(studentResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Saves Student
+     *
+     * @param studentRequestDto - studentRequestDto
+     * @return ResponseEntity<StudentResponseDto>
+     */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<StudentResponseDto> save(@Valid @RequestBody StudentRequestDto studentRequestDto) {
         studentRequestDto.setId(null);
@@ -56,6 +78,12 @@ public class StudentController {
         return new ResponseEntity<>(studentResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Updates Student
+     *
+     * @param studentRequestDto - studentRequestDto
+     * @return ResponseEntity<StudentResponseDto>
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<StudentResponseDto> update(@Valid @RequestBody StudentRequestDto studentRequestDto, @PathVariable Long id) {
         if (!Objects.equals(id, studentRequestDto.getId())) {
@@ -65,6 +93,11 @@ public class StudentController {
         return new ResponseEntity<>(studentResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Deletes Student
+     *
+     * @param id - id
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {

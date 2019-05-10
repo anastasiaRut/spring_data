@@ -6,9 +6,11 @@ import lombok.Setter;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.List;
 import java.util.Set;
 
+/**
+ * Request Data Transfer Object class for Tutor entity
+ */
 @Getter
 @Setter
 public class TutorRequestDto {

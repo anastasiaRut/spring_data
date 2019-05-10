@@ -2,14 +2,21 @@ package com.it.app.service.impl;
 
 import com.it.app.component.LocalizedMessageSource;
 import com.it.app.model.ScheduleMaker;
-import com.it.app.model.StudentCourse;
 import com.it.app.repository.ScheduleMakerRepository;
-import com.it.app.service.*;
+import com.it.app.service.EventService;
+import com.it.app.service.LanguageService;
+import com.it.app.service.RoleService;
+import com.it.app.service.ScheduleMakerService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * The class represents a Implementation of ScheduleMakerService interface
+ *
+ * @author A. Rutkouskaya
+ */
 @Service
 @Transactional
 public class ScheduleMakerServiceImpl implements ScheduleMakerService {

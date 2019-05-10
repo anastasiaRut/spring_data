@@ -15,6 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The class represents a REST Controller for Course entity
+ *
+ * @author A. Rutkouskaya
+ * @see Course
+ */
 @RestController
 @RequestMapping("/courses")
 public class CourseController {
@@ -31,6 +37,11 @@ public class CourseController {
         this.localizedMessageSource = localizedMessageSource;
     }
 
+    /**
+     * Gets all Courses
+     *
+     * @return ResponseEntity<List < CourseResponseDto>>
+     */
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<CourseResponseDto>> getAll() {
         final List<Course> courses = courseService.findAll();
@@ -40,12 +51,24 @@ public class CourseController {
         return new ResponseEntity<>(courseDtoList, HttpStatus.OK);
     }
 
+    /**
+     * Gets one Course
+     *
+     * @param id -id
+     * @return ResponseEntity<CourseResponseDto>
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<CourseResponseDto> getOne(@PathVariable Long id) {
         final CourseResponseDto courseResponseDto = getCourseDto(courseService.findById(id));
         return new ResponseEntity<>(courseResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Saves Course
+     *
+     * @param courseRequestDto - courseRequestDto
+     * @return ResponseEntity<CourseResponseDto>
+     */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<CourseResponseDto> save(@Valid @RequestBody CourseRequestDto courseRequestDto) {
         courseRequestDto.setId(null);
@@ -53,8 +76,14 @@ public class CourseController {
         return new ResponseEntity<>(courseResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Updates Course
+     *
+     * @param courseRequestDto - courseRequestDto
+     * @return ResponseEntity<CourseResponseDto>
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<CourseResponseDto> update(@Valid @RequestBody CourseRequestDto courseRequestDto, @PathVariable Long id) {
+    public ResponseEntity<CourseResponseDto> update(@Valid @RequestBody CourseRequestDto courseRequestDto, @Valid @PathVariable Long id) {
         if (!Objects.equals(id, courseRequestDto.getId())) {
             throw new RuntimeException(localizedMessageSource.getMessage("controller.course.unexpectedId", new Object[]{}));
         }
@@ -62,6 +91,11 @@ public class CourseController {
         return new ResponseEntity<>(courseResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Deletes Course
+     *
+     * @param id - id
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {

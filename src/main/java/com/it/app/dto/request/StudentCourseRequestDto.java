@@ -5,6 +5,9 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * Request Data Transfer Object class for StudentCourse entity
+ */
 @Getter
 @Setter
 public class StudentCourseRequestDto {

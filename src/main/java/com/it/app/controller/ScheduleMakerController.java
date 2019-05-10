@@ -3,7 +3,6 @@ package com.it.app.controller;
 import com.it.app.component.LocalizedMessageSource;
 import com.it.app.dto.request.ScheduleMakerRequestDto;
 import com.it.app.dto.response.ScheduleMakerResponseDto;
-import com.it.app.dto.response.ScheduleMakerResponseDto;
 import com.it.app.model.Language;
 import com.it.app.model.Role;
 import com.it.app.model.ScheduleMaker;
@@ -18,6 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The class represents a REST Controller for ScheduleMaker entity
+ *
+ * @author A. Rutkouskaya
+ * @see ScheduleMaker
+ */
 @RestController
 @RequestMapping("/scheduleMakers")
 public class ScheduleMakerController {
@@ -34,6 +39,11 @@ public class ScheduleMakerController {
         this.localizedMessageSource = localizedMessageSource;
     }
 
+    /**
+     * Gets all ScheduleMakers
+     *
+     * @return ResponseEntity<List < ScheduleMakerResponseDto>>
+     */
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<ScheduleMakerResponseDto>> getAll() {
         final List<ScheduleMaker> scheduleMakers = scheduleMakerService.findAll();
@@ -44,12 +54,24 @@ public class ScheduleMakerController {
         return new ResponseEntity<>(scheduleMakerDtoList, HttpStatus.OK);
     }
 
+    /**
+     * Gets one ScheduleMaker
+     *
+     * @param id -id
+     * @return ResponseEntity<ScheduleMakerResponseDto>
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<ScheduleMakerResponseDto> getOne(@PathVariable Long id) {
         final ScheduleMakerResponseDto scheduleMakerResponseDto = getScheduleMakerDto(scheduleMakerService.findById(id));
         return new ResponseEntity<>(scheduleMakerResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Saves ScheduleMaker
+     *
+     * @param scheduleMakerRequestDto - scheduleMakerRequestDto
+     * @return ResponseEntity<ScheduleMakerResponseDto>
+     */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<ScheduleMakerResponseDto> save(@Valid @RequestBody ScheduleMakerRequestDto scheduleMakerRequestDto) {
         scheduleMakerRequestDto.setId(null);
@@ -57,6 +79,12 @@ public class ScheduleMakerController {
         return new ResponseEntity<>(scheduleMakerResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Updates ScheduleMaker
+     *
+     * @param scheduleMakerRequestDto - scheduleMakerRequestDto
+     * @return ResponseEntity<ScheduleMakerResponseDto>
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<ScheduleMakerResponseDto> update(@Valid @RequestBody ScheduleMakerRequestDto scheduleMakerRequestDto, @PathVariable Long id) {
         if (!Objects.equals(id, scheduleMakerRequestDto.getId())) {
@@ -66,6 +94,11 @@ public class ScheduleMakerController {
         return new ResponseEntity<>(scheduleMakerResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Deletes ScheduleMaker
+     *
+     * @param id - id
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {

@@ -10,11 +10,14 @@ import com.it.app.service.StudentCourseService;
 import com.it.app.service.StudentService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * The class represents a Implementation of StudentCourseService interface
+ *
+ * @author A. Rutkouskaya
+ */
 @Service
 @Transactional
 public class StudentCourseServiceImpl implements StudentCourseService {
@@ -96,8 +99,8 @@ public class StudentCourseServiceImpl implements StudentCourseService {
     }
 
     @Override
-    public List<StudentCourse> findUnacceptedApplications() {
-        return studentCourseRepository.findUnacceptedApplications();
+    public List<StudentCourse> findUnacceptedApplications(Long languageId) {
+        return studentCourseRepository.findUnacceptedApplications(languageId);
     }
 
     @Override
@@ -105,7 +108,7 @@ public class StudentCourseServiceImpl implements StudentCourseService {
         Student student = studentService.findById(studentId);
         Course course = courseService.findById(courseId);
         validate(isEnrolled(courseId, studentId), localizedMessageSource.getMessage("error.student.isEnrolled", new Object[]{}));
-        validate(course.getPlaces()==0, localizedMessageSource.getMessage("error.course.isFull", new Object[]{}));
+        validate(course.getPlaces() == 0, localizedMessageSource.getMessage("error.course.isFull", new Object[]{}));
         StudentCourse studentCourse = new StudentCourse();
         studentCourse.setStatus(false);
         studentCourse.setStudent(student);

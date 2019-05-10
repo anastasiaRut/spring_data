@@ -6,6 +6,9 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 
+/**
+ * Response Data Transfer Object class for Event entity
+ */
 @Getter
 @Setter
 @NoArgsConstructor

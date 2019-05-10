@@ -9,6 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * The class represents a Implementation of TypeOfCourseService interface
+ *
+ * @author A. Rutkouskaya
+ */
 @Service
 @Transactional
 public class TypeOfCourseServiceImpl implements TypeOfCourseService {
@@ -50,7 +55,8 @@ public class TypeOfCourseServiceImpl implements TypeOfCourseService {
 
     @Override
     public TypeOfCourse findById(Long id) {
-        return typeOfCourseRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource.getMessage("error.typeOfCourse.notExist", new Object[]{})));    }
+        return typeOfCourseRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource.getMessage("error.typeOfCourse.notExist", new Object[]{})));
+    }
 
     @Override
     public TypeOfCourse update(TypeOfCourse typeOfCourse) {
@@ -68,7 +74,7 @@ public class TypeOfCourseServiceImpl implements TypeOfCourseService {
     @Override
     public TypeOfCourse findByName(String name) {
         validate(!typeOfCourseRepository.existsByName(name), localizedMessageSource.getMessage("error.typeOfCourse.notExist", new Object[]{}));
-        return  typeOfCourseRepository.findByName(name);
+        return typeOfCourseRepository.findByName(name);
     }
 
     private void validate(boolean expression, String errorMessage) {

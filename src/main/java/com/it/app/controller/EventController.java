@@ -16,6 +16,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The class represents a REST Controller for Event entity
+ *
+ * @author A. Rutkouskaya
+ * @see Event
+ */
 @RestController
 @RequestMapping("/events")
 public class EventController {
@@ -32,6 +38,11 @@ public class EventController {
         this.localizedMessageSource = localizedMessageSource;
     }
 
+    /**
+     * Gets all Events
+     *
+     * @return ResponseEntity<List   <   EventResponseDto>>
+     */
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<EventResponseDto>> getAll() {
         final List<Event> events = eventService.findAll();
@@ -41,12 +52,24 @@ public class EventController {
         return new ResponseEntity<>(eventDtoList, HttpStatus.OK);
     }
 
+    /**
+     * Gets one Event
+     *
+     * @param id -id
+     * @return ResponseEntity<EventResponseDto>
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<EventResponseDto> getOne(@PathVariable Long id) {
         final EventResponseDto eventResponseDto = getEventDto(eventService.findById(id));
         return new ResponseEntity<>(eventResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Saves Event
+     *
+     * @param eventRequestDto - eventRequestDto
+     * @return ResponseEntity<EventResponseDto>
+     */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<EventResponseDto> save(@Valid @RequestBody EventRequestDto eventRequestDto) {
         eventRequestDto.setId(null);
@@ -54,6 +77,12 @@ public class EventController {
         return new ResponseEntity<>(eventResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Updates Event
+     *
+     * @param eventRequestDto - eventRequestDto
+     * @return ResponseEntity<EventResponseDto>
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<EventResponseDto> update(@Valid @RequestBody EventRequestDto eventRequestDto, @PathVariable Long id) {
         if (!Objects.equals(id, eventRequestDto.getId())) {
@@ -63,12 +92,24 @@ public class EventController {
         return new ResponseEntity<>(eventResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Enroll student in event
+     *
+     * @param studentId - id of student
+     * @param eventId   - id of event
+     * @return ResponseEntity<EventResponseDto>
+     */
     @RequestMapping(value = "/enroll", method = RequestMethod.PUT)
     public ResponseEntity<EventResponseDto> enroll(@RequestParam Long studentId, @RequestParam Long eventId) {
         final EventResponseDto eventResponseDto = getEventDto(eventService.enrollInEvent(studentId, eventId));
         return new ResponseEntity<>(eventResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Deletes Event
+     *
+     * @param id - id
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {

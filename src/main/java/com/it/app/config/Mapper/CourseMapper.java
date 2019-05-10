@@ -1,4 +1,4 @@
-package com.it.app.config.customMapper;
+package com.it.app.config.Mapper;
 
 import com.it.app.dto.request.CourseRequestDto;
 import com.it.app.dto.response.CourseResponseDto;

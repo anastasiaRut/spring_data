@@ -9,6 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * The class represents a Implementation of LevelService interface
+ *
+ * @author A. Rutkouskaya
+ */
 @Service
 @Transactional
 public class LevelServiceImpl implements LevelService {

@@ -21,8 +21,8 @@ public interface StudentCourseRepository extends JpaRepository<StudentCourse, Lo
      *
      * @return List<StudentCourse>
      */
-    @Query("FROM StudentCourse studentCourse WHERE studentCourse.status = false")
-    List<StudentCourse> findUnacceptedApplications();
+    @Query("FROM StudentCourse studentCourse WHERE studentCourse.status = false AND studentCourse.course.language.id = :languageId")
+    List<StudentCourse> findUnacceptedApplications(@Param("languageId") Long languageId);
 
     @Query("FROM StudentCourse studentCourse WHERE studentCourse.course.id = :courseId AND studentCourse.student.id = :studentId")
     StudentCourse findEnroll(@Param("courseId") Long courseId, @Param("studentId") Long studentId);

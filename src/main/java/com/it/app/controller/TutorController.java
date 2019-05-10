@@ -7,6 +7,7 @@ import com.it.app.dto.response.TutorResponseDto;
 import com.it.app.model.Language;
 import com.it.app.model.Level;
 import com.it.app.model.Tutor;
+import com.it.app.model.Tutor;
 import com.it.app.service.TutorService;
 import org.dozer.Mapper;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.*;
 
+/**
+ * The class represents a REST Controller for Tutor entity
+ *
+ * @author A. Rutkouskaya
+ * @see Tutor
+ */
 @RestController
 @RequestMapping("/tutors")
 public class TutorController {
@@ -30,7 +37,11 @@ public class TutorController {
         this.tutorService = tutorService;
         this.localizedMessageSource = localizedMessageSource;
     }
-
+    /**
+     * Gets all Tutors
+     *
+     * @return ResponseEntity<List<TutorResponseDto>>
+     */
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<TutorResponseDto>> getAll() {
         final List<Tutor> tutors = tutorService.findAll();
@@ -39,20 +50,36 @@ public class TutorController {
                 .forEach((Tutor) -> tutorDtoList.add(getTutorDto(Tutor)));
         return new ResponseEntity<>(tutorDtoList, HttpStatus.OK);
     }
-
+    /**
+     * Gets one Tutor
+     *
+     * @param id -id
+     * @return ResponseEntity<TutorResponseDto>
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<TutorResponseDto> getOne(@PathVariable Long id) {
         final TutorResponseDto tutorResponseDto = getTutorDto(tutorService.findById(id));
         return new ResponseEntity<>(tutorResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Saves Tutor
+     *
+     * @param tutorRequestDto - tutorRequestDto
+     * @return ResponseEntity<TutorResponseDto>
+     */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<TutorResponseDto> save(@Valid @RequestBody TutorRequestDto tutorRequestDto) {
         tutorRequestDto.setId(null);
         final TutorResponseDto tutorResponseDto = getTutorDto(tutorService.save(getTutor(tutorRequestDto)));
         return new ResponseEntity<>(tutorResponseDto, HttpStatus.OK);
     }
-
+    /**
+     * Updates Tutor
+     *
+     * @param tutorRequestDto - tutorRequestDto
+     * @return ResponseEntity<TutorResponseDto>
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<TutorResponseDto> update(@Valid @RequestBody TutorRequestDto tutorRequestDto, @PathVariable Long id) {
         if (!Objects.equals(id, tutorRequestDto.getId())) {
@@ -61,7 +88,11 @@ public class TutorController {
         final TutorResponseDto tutorResponseDto = getTutorDto(tutorService.update(getTutor(tutorRequestDto)));
         return new ResponseEntity<>(tutorResponseDto, HttpStatus.OK);
     }
-
+    /**
+     * Deletes Tutor
+     *
+     * @param id - id
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {

@@ -7,6 +7,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/**
+ * Request Data Transfer Object class for ScheduleMaker entity
+ */
 @Getter
 @Setter
 public class ScheduleMakerRequestDto {
@@ -22,4 +25,12 @@ public class ScheduleMakerRequestDto {
 
     @NotNull(message = "{scheduleMaker.language.notNull}")
     private Long languageId;
+
+    @NotNull(message = "{ user.username.notNull}")
+    @NotEmpty(message = "{ user.username.notEmpty}")
+    private String username;
+
+    @NotNull(message = "{ user.password.notNull}")
+    @NotEmpty(message = "{ user.password.notEmpty}")
+    private String password;
 }

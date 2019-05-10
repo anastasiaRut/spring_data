@@ -17,6 +17,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * A Controller for authentication
+ */
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/authentication")

@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+/**
+ * The class represents a Implementation of TokenService
+ */
 @Slf4j
 @Service
 public class TokenServiceImpl implements TokenService {

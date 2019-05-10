@@ -9,6 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * The class represents a Implementation of RoleService interface
+ *
+ * @author A. Rutkouskaya
+ */
 @Service
 @Transactional
 public class RoleServiceImpl implements RoleService {
@@ -62,7 +67,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role findByName(String name) {
-        return roleRepository.findByName(name);}
+        return roleRepository.findByName(name);
+    }
 
     @Override
     public List<Role> findAll() {

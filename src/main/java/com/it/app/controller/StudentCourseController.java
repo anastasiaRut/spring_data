@@ -17,6 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The class represents a REST Controller for StudentCourse entity
+ *
+ * @author A. Rutkouskaya
+ * @see StudentCourse
+ */
 @RestController
 @RequestMapping("/studentCourses")
 public class StudentCourseController {
@@ -33,6 +39,11 @@ public class StudentCourseController {
         this.localizedMessageSource = localizedMessageSource;
     }
 
+    /**
+     * Gets all StudentCourses
+     *
+     * @return ResponseEntity<List   <   StudentCourseResponseDto>>
+     */
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<StudentCourseResponseDto>> getAll() {
         final List<StudentCourse> studentCourses = studentCourseService.findAll();
@@ -42,12 +53,24 @@ public class StudentCourseController {
         return new ResponseEntity<>(studentCourseDtoList, HttpStatus.OK);
     }
 
+    /**
+     * Gets one StudentCourse
+     *
+     * @param id -id
+     * @return ResponseEntity<StudentCourseResponseDto>
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<StudentCourseResponseDto> getOne(@PathVariable Long id) {
         final StudentCourseResponseDto studentCourseResponseDto = getStudentCourseDto(studentCourseService.findById(id));
         return new ResponseEntity<>(studentCourseResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Saves StudentCourse
+     *
+     * @param studentCourseRequestDto - studentCourseRequestDto
+     * @return ResponseEntity<StudentCourseResponseDto>
+     */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<StudentCourseResponseDto> save(@Valid @RequestBody StudentCourseRequestDto studentCourseRequestDto) {
         studentCourseRequestDto.setId(null);
@@ -55,6 +78,12 @@ public class StudentCourseController {
         return new ResponseEntity<>(studentCourseResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Updates StudentCourse
+     *
+     * @param studentCourseRequestDto - studentCourseRequestDto
+     * @return ResponseEntity<StudentCourseResponseDto>
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<StudentCourseResponseDto> update(@Valid @RequestBody StudentCourseRequestDto studentCourseRequestDto, @PathVariable Long id) {
         if (!Objects.equals(id, studentCourseRequestDto.getId())) {
@@ -64,13 +93,23 @@ public class StudentCourseController {
         return new ResponseEntity<>(studentCourseResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Deletes StudentCourse
+     *
+     * @param id - id
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {
         studentCourseService.deleteById(id);
     }
 
-
+    /**
+     * Enroll student in course
+     *
+     * @param studentCourseRequestDto - studentCourseRequestDto
+     * @return ResponseEntity<StudentCourseResponseDto>
+     */
     @RequestMapping(value = "/enroll", method = RequestMethod.POST)
     public ResponseEntity<StudentCourseResponseDto> enroll(@Valid @RequestBody StudentCourseRequestDto studentCourseRequestDto) {
         studentCourseRequestDto.setId(null);
@@ -79,15 +118,26 @@ public class StudentCourseController {
         return new ResponseEntity<>(studentCourseResponseDto, HttpStatus.OK);
     }
 
+    /**
+     * Finds unaccepted applications
+     *
+     * @return ResponseEntity<List<StudentCourseResponseDto>>
+     */
     @RequestMapping(value = "/falseApplications", method = RequestMethod.GET)
-    public ResponseEntity<List<StudentCourseResponseDto>> getUnacceptedStudentCourses() {
-        final List<StudentCourse> studentCourses = studentCourseService.findUnacceptedApplications();
+    public ResponseEntity<List<StudentCourseResponseDto>> getUnacceptedStudentCourses(@RequestParam Long languageId) {
+        final List<StudentCourse> studentCourses = studentCourseService.findUnacceptedApplications(languageId);
         final List<StudentCourseResponseDto> studentCourseDtoList = new ArrayList<>();
         studentCourses.stream()
                 .forEach((StudentCourse) -> studentCourseDtoList.add(getStudentCourseDto(StudentCourse)));
         return new ResponseEntity<>(studentCourseDtoList, HttpStatus.OK);
     }
 
+    /**
+     * Accepts application
+     *
+     * @param id - id
+     * @return ResponseEntity<StudentCourseResponseDto>
+     */
     @RequestMapping(value = "accept/{id}", method = RequestMethod.PUT)
     public ResponseEntity<StudentCourseResponseDto> accept(@PathVariable Long id) {
         final StudentCourseResponseDto studentCourseResponseDto = getStudentCourseDto(studentCourseService.acceptApplication(id));

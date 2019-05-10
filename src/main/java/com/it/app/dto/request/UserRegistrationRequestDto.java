@@ -7,6 +7,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/**
+ * Request Data Transfer Object class for registration
+ */
 @Getter
 @Setter
 public class UserRegistrationRequestDto {

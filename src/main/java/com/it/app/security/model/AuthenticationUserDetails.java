@@ -8,6 +8,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Objects;
 
+/**
+ *  * The class represents a Implementation of UserDetails interface
+ */
 @AllArgsConstructor
 public class AuthenticationUserDetails implements UserDetails {
     @Getter
@@ -22,7 +25,7 @@ public class AuthenticationUserDetails implements UserDetails {
     /**
      * Returns the username used to authenticate the User. Cannot return <code>null</code>.
      *
-     * @return - username
+     * @return - String
      */
     @Override
     public String getUsername() {
@@ -32,7 +35,7 @@ public class AuthenticationUserDetails implements UserDetails {
     /**
      * Returns the password used to authenticate the User
      *
-     * @return - password
+     * @return - String
      */
     @Override
     public String getPassword() {
@@ -42,7 +45,7 @@ public class AuthenticationUserDetails implements UserDetails {
     /**
      * Returns the authorities granted to the User
      *
-     * @return - the authorities, sorted by natural key
+     * @return - the authorities, sorted by key
      */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -60,33 +63,16 @@ public class AuthenticationUserDetails implements UserDetails {
         return true;
     }
 
-    /**
-     * Indicates whether the user is locked or unlocked. A locked user cannot be authenticated.
-     *
-     * @return - <code>true</code> if the user is not locked, <code>false</code> otherwise
-     */
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
-    /**
-     * Indicates whether the user's credentials (password) has expired.
-     * Expired credentials prevent authentication.
-     *
-     * @return - <code>true</code> if the user's credentials are valid (ie non-expired),
-     * <code>false</code> if no longer valid (ie expired)
-     */
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
-    /**
-     * Indicates whether the user is enabled or disabled. A disabled user cannot be authenticated.
-     *
-     * @return - <code>true</code> if the user is enabled, <code>false</code> otherwise
-     */
     @Override
     public boolean isEnabled() {
         return true;

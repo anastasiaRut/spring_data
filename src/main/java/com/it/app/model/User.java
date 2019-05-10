@@ -38,19 +38,19 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    /*@NotNull(message = "{ user.name.notNull}")
+   /* @NotNull(message = "{ user.name.notNull}")
     @NotEmpty(message = "{ user.name.notEmpty}")*/
     @Size(min = 3, max = 50, message = "{ user.name.size}")
     @Column(name = "name")
     private String name;
 
-   /* @NotNull(message = "{ user.surname.notNull}")
+    /*@NotNull(message = "{ user.surname.notNull}")
     @NotEmpty(message = "{ user.surname.notEmpty}")*/
     @Size(min = 3, max = 50, message = "{ user.surname.size}")
     @Column(name = "surname")
     private String surname;
-
-    /*@NotNull(message = "{ user.email.notNull}")
+/*
+    @NotNull(message = "{ user.email.notNull}")
     @NotEmpty(message = "{ user.email.notEmpty}")*/
     @Email(message = "{{ user.email.valid}")
     @Column(name = "email", unique = true)

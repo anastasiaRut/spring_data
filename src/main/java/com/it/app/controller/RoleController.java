@@ -2,14 +2,11 @@ package com.it.app.controller;
 
 import com.it.app.component.LocalizedMessageSource;
 import com.it.app.dto.RoleDto;
-import com.it.app.dto.RoleDto;
 import com.it.app.model.Role;
 import com.it.app.service.RoleService;
 import org.dozer.Mapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,6 +14,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * The class represents a REST Controller for Role entity
+ *
+ * @author A. Rutkouskaya
+ * @see Role
+ */
 @RestController
 @RequestMapping("/roles")
 public class RoleController {
@@ -32,6 +35,11 @@ public class RoleController {
         this.localizedMessageSource = localizedMessageSource;
     }
 
+    /**
+     * Gets all Roles
+     *
+     * @return ResponseEntity<List < RoleResponseDto>>
+     */
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<RoleDto>> getAll() {
         final List<Role> roles = roleService.findAll();
@@ -41,12 +49,24 @@ public class RoleController {
         return new ResponseEntity<>(roleDtoList, HttpStatus.OK);
     }
 
+    /**
+     * Gets one Role
+     *
+     * @param id -id
+     * @return ResponseEntity<RoleResponseDto>
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<RoleDto> getOne(@PathVariable Long id) {
         final RoleDto roleDto = mapper.map(roleService.findById(id), RoleDto.class);
         return new ResponseEntity<>(roleDto, HttpStatus.OK);
     }
 
+    /**
+     * Saves Role
+     *
+     * @param roleDto - roleRDto
+     * @return ResponseEntity<RoleResponseDto>
+     */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<RoleDto> save(@Valid @RequestBody RoleDto roleDto) {
         roleDto.setId(null);
@@ -54,6 +74,12 @@ public class RoleController {
         return new ResponseEntity<>(responseRoleDto, HttpStatus.OK);
     }
 
+    /**
+     * Updates Role
+     *
+     * @param roleDto - roleDto
+     * @return ResponseEntity<RoleResponseDto>
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<RoleDto> update(@Valid @RequestBody RoleDto roleDto, @PathVariable Long id) {
         if (!Objects.equals(id, roleDto.getId())) {
@@ -63,6 +89,11 @@ public class RoleController {
         return new ResponseEntity<>(responseRoleDto, HttpStatus.OK);
     }
 
+    /**
+     * Deletes Role
+     *
+     * @param id - id
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {

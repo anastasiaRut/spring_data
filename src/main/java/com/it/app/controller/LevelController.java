@@ -2,7 +2,6 @@ package com.it.app.controller;
 
 import com.it.app.component.LocalizedMessageSource;
 import com.it.app.dto.LevelDto;
-import com.it.app.dto.LevelDto;
 import com.it.app.model.Level;
 import com.it.app.service.LevelService;
 import org.dozer.Mapper;
@@ -15,6 +14,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * The class represents a REST Controller for Level entity
+ *
+ * @author A. Rutkouskaya
+ * @see Level
+ */
 @RestController
 @RequestMapping("/levels")
 public class LevelController {
@@ -30,6 +35,11 @@ public class LevelController {
         this.localizedMessageSource = localizedMessageSource;
     }
 
+    /**
+     * Gets all Levels
+     *
+     * @return ResponseEntity<List   <   LevelResponseDto>>
+     */
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<LevelDto>> getAll() {
         final List<Level> levels = levelService.findAll();
@@ -39,12 +49,24 @@ public class LevelController {
         return new ResponseEntity<>(levelDtoList, HttpStatus.OK);
     }
 
+    /**
+     * Gets one Level
+     *
+     * @param id -id
+     * @return ResponseEntity<LevelResponseDto>
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<LevelDto> getOne(@PathVariable Long id) {
         final LevelDto levelDto = mapper.map(levelService.findById(id), LevelDto.class);
         return new ResponseEntity<>(levelDto, HttpStatus.OK);
     }
 
+    /**
+     * Saves Level
+     *
+     * @param levelDto - levelRDto
+     * @return ResponseEntity<LevelResponseDto>
+     */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<LevelDto> save(@Valid @RequestBody LevelDto levelDto) {
         levelDto.setId(null);
@@ -52,6 +74,12 @@ public class LevelController {
         return new ResponseEntity<>(responseLevelDto, HttpStatus.OK);
     }
 
+    /**
+     * Updates Level
+     *
+     * @param levelDto - levelDto
+     * @return ResponseEntity<LevelResponseDto>
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<LevelDto> update(@Valid @RequestBody LevelDto levelDto, @PathVariable Long id) {
         if (!Objects.equals(id, levelDto.getId())) {
@@ -61,6 +89,11 @@ public class LevelController {
         return new ResponseEntity<>(responseLevelDto, HttpStatus.OK);
     }
 
+    /**
+     * Deletes Level
+     *
+     * @param id - id
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {

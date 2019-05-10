@@ -2,10 +2,8 @@ package com.it.app.controller;
 
 import com.it.app.component.LocalizedMessageSource;
 import com.it.app.dto.LanguageDto;
-import com.it.app.dto.LanguageDto;
 import com.it.app.model.Language;
 import com.it.app.service.LanguageService;
-import lombok.extern.slf4j.Slf4j;
 import org.dozer.Mapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +14,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * The class represents a REST Controller for Language entity
+ *
+ * @author A. Rutkouskaya
+ * @see Language
+ */
 @RestController
 @RequestMapping("/languages")
 public class LanguageController {
@@ -31,6 +35,11 @@ public class LanguageController {
         this.localizedMessageSource = localizedMessageSource;
     }
 
+    /**
+     * Gets all Languages
+     *
+     * @return ResponseEntity<List   <   LanguageResponseDto>>
+     */
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<LanguageDto>> getAll() {
         final List<Language> languages = languageService.findAll();
@@ -40,12 +49,24 @@ public class LanguageController {
         return new ResponseEntity<>(languageDtoList, HttpStatus.OK);
     }
 
+    /**
+     * Gets one Language
+     *
+     * @param id -id
+     * @return ResponseEntity<LanguageResponseDto>
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<LanguageDto> getOne(@PathVariable Long id) {
         final LanguageDto languageDto = mapper.map(languageService.findById(id), LanguageDto.class);
         return new ResponseEntity<>(languageDto, HttpStatus.OK);
     }
 
+    /**
+     * Saves Language
+     *
+     * @param languageDto - languageRDto
+     * @return ResponseEntity<LanguageResponseDto>
+     */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<LanguageDto> save(@Valid @RequestBody LanguageDto languageDto) {
         languageDto.setId(null);
@@ -54,6 +75,12 @@ public class LanguageController {
         return new ResponseEntity<>(responseLanguageDto, HttpStatus.OK);
     }
 
+    /**
+     * Updates Language
+     *
+     * @param languageDto - languageDto
+     * @return ResponseEntity<LanguageResponseDto>
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<LanguageDto> update(@Valid @RequestBody LanguageDto languageDto, @PathVariable Long id) {
         if (!Objects.equals(id, languageDto.getId())) {
@@ -63,6 +90,11 @@ public class LanguageController {
         return new ResponseEntity<>(responseLanguageDto, HttpStatus.OK);
     }
 
+    /**
+     * Deletes Language
+     *
+     * @param id - id
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void delete(@PathVariable Long id) {

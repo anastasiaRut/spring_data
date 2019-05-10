@@ -14,6 +14,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * The class represents a Implementation of EventService interface
+ *
+ * @author A. Rutkouskaya
+ */
 @Service
 @Transactional
 public class EventServiceImpl implements EventService {
@@ -94,7 +99,7 @@ public class EventServiceImpl implements EventService {
         events.add(event);
         student.setEvents(events);
         studentService.update(student);
-        event.setPlaces(event.getPlaces()-1);
+        event.setPlaces(event.getPlaces() - 1);
         return update(event);
     }
 

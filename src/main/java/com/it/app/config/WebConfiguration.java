@@ -1,6 +1,6 @@
 package com.it.app.config;
 
-import com.it.app.config.customMapper.CourseMapper;
+import com.it.app.config.Mapper.CourseMapper;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.context.annotation.Bean;

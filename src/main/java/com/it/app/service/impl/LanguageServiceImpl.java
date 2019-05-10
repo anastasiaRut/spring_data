@@ -9,6 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * The class represents a Implementation of LanguageService interface
+ *
+ * @author A. Rutkouskaya
+ */
 @Service
 @Transactional
 public class LanguageServiceImpl implements LanguageService {
