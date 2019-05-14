@@ -37,18 +37,27 @@ public class TutorServiceImpl implements TutorService {
         this.levelService = levelService;
     }
 
+    /**
+     * @see TutorService#save(Tutor)
+     */
     @Override
     public Tutor save(Tutor tutor) {
         validate(tutor.getId() != null, localizedMessageSource.getMessage("error.tutor.notHaveId", new Object[]{}));
         return saveAndFlush(tutor);
     }
 
+    /**
+     * @see TutorService#deleteById(Long)
+     */
     @Override
     public void deleteById(Long id) {
         findById(id);
         tutorRepository.deleteById(id);
     }
 
+    /**
+     * @see TutorService#delete(Tutor)
+     */
     @Override
     public void delete(Tutor entity) {
         final Long id = entity.getId();
@@ -57,11 +66,17 @@ public class TutorServiceImpl implements TutorService {
         tutorRepository.delete(entity);
     }
 
+    /**
+     * @see TutorService#getOne(Long)
+     */
     @Override
     public Tutor getOne(Long id) {
         return tutorRepository.getOne(id);
     }
 
+    /**
+     * @see TutorService#update(Tutor)
+     */
     @Override
     public Tutor update(Tutor tutor) {
         validate(tutor.getId() == null, localizedMessageSource.getMessage("error.tutor.haveId", new Object[]{}));
@@ -69,17 +84,26 @@ public class TutorServiceImpl implements TutorService {
         return saveAndFlush(tutor);
     }
 
+    /**
+     * @see TutorService#findById(Long)
+     */
     @Override
     public Tutor findById(Long id) {
         return tutorRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource.getMessage("error.tutor.notExist", new Object[]{})));
 
     }
 
+    /**
+     * @see TutorService#findAll()
+     */
     @Override
     public List<Tutor> findAll() {
         return tutorRepository.findAll();
     }
 
+    /**
+     * @see TutorService#findTutorsByLanguage(String)
+     */
     @Override
     public List<Tutor> findTutorsByLanguage(String language) {
         return tutorRepository.findTutorsByLanguage(language);

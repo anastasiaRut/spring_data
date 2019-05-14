@@ -2,7 +2,9 @@ package com.it.app.service.impl;
 
 import com.it.app.component.LocalizedMessageSource;
 import com.it.app.model.Role;
+import com.it.app.model.Role;
 import com.it.app.repository.RoleRepository;
+import com.it.app.service.RoleService;
 import com.it.app.service.RoleService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +28,9 @@ public class RoleServiceImpl implements RoleService {
         this.roleRepository = roleRepository;
     }
 
+    /**
+     * @see RoleService#save(Role)
+     */
     @Override
     public Role save(Role role) {
         validate(role.getId() != null, localizedMessageSource.getMessage("error.role.notHaveId", new Object[]{}));
@@ -33,12 +38,18 @@ public class RoleServiceImpl implements RoleService {
         return roleRepository.saveAndFlush(role);
     }
 
+    /**
+     * @see RoleService#deleteById(Long)
+     */
     @Override
     public void deleteById(Long id) {
         findById(id);
         roleRepository.deleteById(id);
     }
 
+    /**
+     * @see RoleService#delete(Role)
+     */
     @Override
     public void delete(Role entity) {
         final Long id = entity.getId();
@@ -47,11 +58,17 @@ public class RoleServiceImpl implements RoleService {
         roleRepository.delete(entity);
     }
 
+    /**
+     * @see RoleService#getOne(Long)
+     */
     @Override
     public Role getOne(Long id) {
         return roleRepository.getOne(id);
     }
 
+    /**
+     * @see RoleService#update(Role)
+     */
     @Override
     public Role update(Role role) {
         validate(role.getId() == null, localizedMessageSource.getMessage("error.role.haveId", new Object[]{}));
@@ -60,26 +77,41 @@ public class RoleServiceImpl implements RoleService {
         return roleRepository.saveAndFlush(role);
     }
 
+    /**
+     * @see RoleService#findById(Long)
+     */
     @Override
     public Role findById(Long id) {
         return roleRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource.getMessage("error.role.notExist", new Object[]{})));
     }
 
+    /**
+     * @see RoleService#findByName(String)
+     */
     @Override
     public Role findByName(String name) {
         return roleRepository.findByName(name);
     }
 
+    /**
+     * @see RoleService#findAll()
+     */
     @Override
     public List<Role> findAll() {
         return roleRepository.findAll();
     }
 
+    /**
+     * @see RoleService#findRoleWithUsers(String)
+     */
     @Override
     public Role findRoleWithUsers(String nameOfRole) {
         return roleRepository.findRoleWithUsers(nameOfRole);
     }
 
+    /**
+     * @see RoleService#findAllWithUsers()
+     */
     @Override
     public List<Role> findAllWithUsers() {
         return roleRepository.findAllWithUsers();

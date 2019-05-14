@@ -30,18 +30,27 @@ public class StudentServiceImpl implements StudentService {
         this.roleService = roleService;
     }
 
+    /**
+     * @see StudentService#save(Student)
+     */
     @Override
     public Student save(Student student) {
         validate(student.getId() != null, localizedMessageSource.getMessage("error.student.notHaveId", new Object[]{}));
         return saveAndFlush(student);
     }
 
+    /**
+     * @see StudentService#deleteById(Long)
+     */
     @Override
     public void deleteById(Long id) {
         findById(id);
         studentRepository.deleteById(id);
     }
 
+    /**
+     * @see StudentService#delete(Student)
+     */
     @Override
     public void delete(Student entity) {
         final Long id = entity.getId();
@@ -50,11 +59,17 @@ public class StudentServiceImpl implements StudentService {
         studentRepository.delete(entity);
     }
 
+    /**
+     * @see StudentService#getOne(Long)
+     */
     @Override
     public Student getOne(Long id) {
         return studentRepository.getOne(id);
     }
 
+    /**
+     * @see StudentService#update(Student)
+     */
     @Override
     public Student update(Student student) {
         validate(student.getId() == null, localizedMessageSource.getMessage("error.student.haveId", new Object[]{}));
@@ -62,17 +77,26 @@ public class StudentServiceImpl implements StudentService {
         return saveAndFlush(student);
     }
 
+    /**
+     * @see StudentService#findById(Long)
+     */
     @Override
     public Student findById(Long id) {
         return studentRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource.getMessage("error.student.notExist", new Object[]{})));
 
     }
 
+    /**
+     * @see StudentService#findAll()
+     */
     @Override
     public List<Student> findAll() {
         return studentRepository.findAll();
     }
 
+    /**
+     * @see StudentService#findByPhoneNumber(String)
+     */
     @Override
     public Student findByPhoneNumber(String phoneNumber) {
         return studentRepository.findByPhoneNumber(phoneNumber);

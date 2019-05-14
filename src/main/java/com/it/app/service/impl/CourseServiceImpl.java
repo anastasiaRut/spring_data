@@ -40,18 +40,27 @@ public class CourseServiceImpl implements CourseService {
         this.typeOfCourseService = typeOfCourseService;
     }
 
+    /**
+     * @see CourseService#save(Course)
+     */
     @Override
     public Course save(Course course) {
         validate(course.getId() != null, localizedMessageSource.getMessage("error.course.notHaveId", new Object[]{}));
         return saveAndFlush(course);
     }
 
+    /**
+     * @see CourseService#deleteById(Long)
+     */
     @Override
     public void deleteById(Long id) {
         findById(id);
         courseRepository.deleteById(id);
     }
 
+    /**
+     * @see CourseService#delete(Course)
+     */
     @Override
     public void delete(Course entity) {
         final Long id = entity.getId();
@@ -60,11 +69,17 @@ public class CourseServiceImpl implements CourseService {
         courseRepository.delete(entity);
     }
 
+    /**
+     * @see CourseService#getOne(Long)
+     */
     @Override
     public Course getOne(Long id) {
         return courseRepository.getOne(id);
     }
 
+    /**
+     * @see CourseService#update(Course)
+     */
     @Override
     public Course update(Course course) {
         validate(course.getId() == null, localizedMessageSource.getMessage("error.course.haveId", new Object[]{}));
@@ -72,21 +87,33 @@ public class CourseServiceImpl implements CourseService {
         return saveAndFlush(course);
     }
 
+    /**
+     * @see CourseService#findAll()
+     */
     @Override
     public List<Course> findAll() {
         return courseRepository.findAll();
     }
 
+    /**
+     * @see CourseService#findById(Long)
+     */
     @Override
     public Course findById(Long id) {
         return courseRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource.getMessage("error.course.notExist", new Object[]{})));
     }
 
+    /**
+     * @see CourseService#findCoursesByLanguage(String)
+     */
     @Override
     public List<Course> findCoursesByLanguage(String language) {
         return courseRepository.findCoursesByLanguage(language);
     }
 
+    /**
+     * @see CourseService#sortCoursesByFreePlaces()
+     */
     @Override
     public List<Course> sortCoursesByFreePlaces() {
         return courseRepository.sortCoursesByFreePlaces();

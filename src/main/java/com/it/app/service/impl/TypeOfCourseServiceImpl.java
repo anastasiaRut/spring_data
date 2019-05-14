@@ -27,6 +27,9 @@ public class TypeOfCourseServiceImpl implements TypeOfCourseService {
         this.typeOfCourseRepository = typeOfCourseRepository;
     }
 
+    /**
+     * @see TypeOfCourseService#save(TypeOfCourse)
+     */
     @Override
     public TypeOfCourse save(TypeOfCourse typeOfCourse) {
         validate(typeOfCourse.getId() != null, localizedMessageSource.getMessage("error.typeOfCourse.notHaveId", new Object[]{}));
@@ -34,12 +37,18 @@ public class TypeOfCourseServiceImpl implements TypeOfCourseService {
         return typeOfCourseRepository.saveAndFlush(typeOfCourse);
     }
 
+    /**
+     * @see TypeOfCourseService#deleteById(Long)
+     */
     @Override
     public void deleteById(Long id) {
         findById(id);
         typeOfCourseRepository.deleteById(id);
     }
 
+    /**
+     * @see TypeOfCourseService#delete(TypeOfCourse)
+     */
     @Override
     public void delete(TypeOfCourse entity) {
         final Long id = entity.getId();
@@ -48,16 +57,25 @@ public class TypeOfCourseServiceImpl implements TypeOfCourseService {
         typeOfCourseRepository.delete(entity);
     }
 
+    /**
+     * @see TypeOfCourseService#getOne(Long)
+     */
     @Override
     public TypeOfCourse getOne(Long id) {
         return typeOfCourseRepository.getOne(id);
     }
 
     @Override
+/**
+ * @see TypeOfCourseService#findById(Long)
+ */
     public TypeOfCourse findById(Long id) {
         return typeOfCourseRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource.getMessage("error.typeOfCourse.notExist", new Object[]{})));
     }
 
+    /**
+     * @see TypeOfCourseService#update(TypeOfCourse)
+     */
     @Override
     public TypeOfCourse update(TypeOfCourse typeOfCourse) {
         validate(typeOfCourse.getId() == null, localizedMessageSource.getMessage("error.typeOfCourse.haveId", new Object[]{}));
@@ -66,11 +84,17 @@ public class TypeOfCourseServiceImpl implements TypeOfCourseService {
         return typeOfCourseRepository.saveAndFlush(typeOfCourse);
     }
 
+    /**
+     * @see TypeOfCourseService#findAll()
+     */
     @Override
     public List<TypeOfCourse> findAll() {
         return typeOfCourseRepository.findAll();
     }
 
+    /**
+     * @see TypeOfCourseService#findByName(String)
+     */
     @Override
     public TypeOfCourse findByName(String name) {
         validate(!typeOfCourseRepository.existsByName(name), localizedMessageSource.getMessage("error.typeOfCourse.notExist", new Object[]{}));

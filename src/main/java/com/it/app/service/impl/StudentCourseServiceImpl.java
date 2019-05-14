@@ -81,10 +81,7 @@ public class StudentCourseServiceImpl implements StudentCourseService {
 
     @Override
     public boolean isEnrolled(Long courseId, Long studentId) {
-        if (studentCourseRepository.findEnroll(courseId, studentId) == null) {
-            return false;
-        } else
-            return true;
+        return studentCourseRepository.findEnroll(courseId, studentId)!= null;
     }
 
     @Override

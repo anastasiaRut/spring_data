@@ -27,6 +27,8 @@
         <mockito>2.27.0</mockito>
         <junit>5.5.0-M1</junit>
         <io.jsonwebtoken>0.9.1</io.jsonwebtoken>
+        <swagger2>2.9.2</swagger2>
+        <swagger-ui>2.9.2</swagger-ui>
     </properties>
     <dependencies>
         <dependency>
@@ -152,6 +154,16 @@
             <version>RELEASE</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger2}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger-ui}</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -163,6 +175,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>school</finalName>
     </build>
 
 </project>

@@ -37,18 +37,27 @@ public class EventServiceImpl implements EventService {
         this.studentService = studentService;
     }
 
+    /**
+     * @see EventService#save(Event)
+     */
     @Override
     public Event save(Event event) {
         validate(event.getId() != null, localizedMessageSource.getMessage("error.event.notHaveId", new Object[]{}));
         return saveAndFlush(event);
     }
 
+    /**
+     * @see EventService#deleteById(Long)
+     */
     @Override
     public void deleteById(Long id) {
         findById(id);
         eventRepository.deleteById(id);
     }
 
+    /**
+     * @see EventService#delete(Event)
+     */
     @Override
     public void delete(Event entity) {
         final Long id = entity.getId();
@@ -57,11 +66,17 @@ public class EventServiceImpl implements EventService {
         eventRepository.delete(entity);
     }
 
+    /**
+     * @see EventService#getOne(Long)
+     */
     @Override
     public Event getOne(Long id) {
         return eventRepository.getOne(id);
     }
 
+    /**
+     * @see EventService#update(Event)
+     */
     @Override
     public Event update(Event event) {
         validate(event.getId() == null, localizedMessageSource.getMessage("error.event.haveId", new Object[]{}));
@@ -69,11 +84,17 @@ public class EventServiceImpl implements EventService {
         return saveAndFlush(event);
     }
 
+    /**
+     * @see EventService#findAll()
+     */
     @Override
     public List<Event> findAll() {
         return eventRepository.findAll();
     }
 
+    /**
+     * @see EventService#isEnrolled(Long, Long)
+     */
     @Override
     public boolean isEnrolled(Long eventId, Long studentId) {
         Student student = studentService.findById(studentId);
@@ -87,6 +108,9 @@ public class EventServiceImpl implements EventService {
         return false;
     }
 
+    /**
+     * @see EventService#enrollInEvent(Long, Long)
+     */
     @Override
     public Event enrollInEvent(Long eventId, Long studentId) {
         Event event = findById(eventId);
@@ -103,6 +127,9 @@ public class EventServiceImpl implements EventService {
         return update(event);
     }
 
+    /**
+     * @see EventService#findById(Long)
+     */
     @Override
     public Event findById(Long id) {
         return eventRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource.getMessage("error.event.notExist", new Object[]{})));
@@ -114,11 +141,17 @@ public class EventServiceImpl implements EventService {
         }
     }
 
+    /**
+     * @see EventService#sortEventsByCost()
+     */
     @Override
     public List<Event> sortEventsByCost() {
         return eventRepository.sortEventsByCost();
     }
 
+    /**
+     * @see EventService#findEventsWithStudents()
+     */
     @Override
     public List<Event> findEventsWithStudents() {
         return eventRepository.findEventsWithStudents();

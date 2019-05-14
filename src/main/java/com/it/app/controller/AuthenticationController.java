@@ -30,6 +30,12 @@ public class AuthenticationController {
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder encoder;
 
+    /**
+     * Sign in
+     * @param username
+     * @param password
+     * @return TokenResponseDto
+     */
     @GetMapping("/signIn")
     public TokenResponseDto authenticateUser(@RequestParam String username, @RequestParam String password) {
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
@@ -38,11 +44,21 @@ public class AuthenticationController {
         return new TokenResponseDto(tokenService.generate(authentication));
     }
 
+    /**
+     * Refresh token
+     * @param token
+     * @return
+     */
     @PostMapping("/refresh")
     public TokenResponseDto refreshToken(@RequestParam String token) {
         return new TokenResponseDto(tokenService.refresh(token));
     }
 
+    /**
+     * Sign up
+     * @param userRegistrationRequestDto
+     * @return User
+     */
     @PostMapping("/signUp")
     public User registerUser(@RequestBody UserRegistrationRequestDto userRegistrationRequestDto) {
         final Role role = roleService.findByName(userRegistrationRequestDto.getRole());

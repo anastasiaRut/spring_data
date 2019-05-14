@@ -31,16 +31,25 @@ public class UserServiceImpl implements UserService {
         this.localizedMessageSource = localizedMessageSource;
     }
 
+    /**
+     * @see UserService#findAll()
+     */
     @Override
     public List<User> findAll() {
         return userRepository.findAll();
     }
 
+    /**
+     * @see UserService#findById(Long)
+     */
     @Override
     public User findById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource.getMessage("error.user.notExist", new Object[]{})));
     }
 
+    /**
+     * @see UserService#save(User)
+     */
     @Override
     public User save(User user) {
         validate(user.getId() != null, localizedMessageSource.getMessage("error.user.notHaveId", new Object[]{}));
@@ -48,6 +57,9 @@ public class UserServiceImpl implements UserService {
         return saveAndFlush(user);
     }
 
+    /**
+     * @see UserService#update(User)
+     */
     @Override
     public User update(User user) {
         final Long id = user.getId();
@@ -59,7 +71,9 @@ public class UserServiceImpl implements UserService {
         return saveAndFlush(user);
     }
 
-
+    /**
+     * @see UserService#delete(User)
+     */
     @Override
     public void delete(User user) {
         final Long id = user.getId();
@@ -68,23 +82,34 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(user);
     }
 
+    /**
+     * @see UserService#getOne(Long)
+     */
     @Override
     public User getOne(Long id) {
         return userRepository.getOne(id);
     }
 
+    /**
+     * @see UserService#deleteById(Long)
+     */
     @Override
     public void deleteById(Long id) {
         findById(id);
         userRepository.deleteById(id);
     }
 
-
+    /**
+     * @see UserService#findByUsername(String)
+     */
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
+    /**
+     * @see UserService#findByEmail(String)
+     */
     @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);

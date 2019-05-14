@@ -10,6 +10,9 @@ import org.dozer.loader.api.FieldsMappingOptions;
 
 import java.time.LocalDate;
 
+/**
+ * Mapper for Course entity
+ */
 public class CourseMapper {
     @Getter
     private BeanMappingBuilder courseMappingRequestDto = new BeanMappingBuilder() {
@@ -29,6 +32,11 @@ public class CourseMapper {
         }
     };
 
+    /**
+     * Performs mapping between String and LocalDate for Course entity
+     *
+     * @see LocalDate
+     */
     public static class CourseConverterImpl extends DozerConverter<LocalDate, String> {
 
         public CourseConverterImpl() {

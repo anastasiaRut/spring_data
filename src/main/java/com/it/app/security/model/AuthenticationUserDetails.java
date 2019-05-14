@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 /**
- *  * The class represents a Implementation of UserDetails interface
+ *  * The class represents an implementation of UserDetails interface
  */
 @AllArgsConstructor
 public class AuthenticationUserDetails implements UserDetails {

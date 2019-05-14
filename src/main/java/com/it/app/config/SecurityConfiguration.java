@@ -15,6 +15,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * Spring Security configuration
+ */
 @RequiredArgsConstructor
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -35,6 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     /**
      * Gets encoder for encoding passwords
+     *
      * @return
      */
     @Bean
@@ -48,8 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable().cors()
                 .and()
                 .authorizeRequests()
-                .mvcMatchers("/authentication/**").permitAll()
-                .mvcMatchers(HttpMethod.GET, "/courses/**", "/tutors/**", "/languages/**", "/levels/**", "/types/**", "/events/**").permitAll()
+                .mvcMatchers("/authentication/**", "/v2/api-docs", "/swagger-resources/configuration/ui", "/swagger-resources", "/swagger-resources/configuration/security", "/swagger-ui.html", "/webjars/**", "/termsOfService").permitAll().mvcMatchers(HttpMethod.GET, "/courses/**", "/tutors/**", "/languages/**", "/levels/**", "/types/**", "/events/**").permitAll()
                 .mvcMatchers("/studentCourses/enroll", "/events/enroll/**").hasRole("STUDENT")
                 .mvcMatchers("/courses/**", "events/**", "/studentCourses/**").hasRole("MAKER")
                 .mvcMatchers("/roles/**", "/users/**", "/students/**", "/scheduleMakers/**", "/events/**", "/languages/**", "/levels/**", "/types/**", "/tutors/**", "/courses/**", "/studentCourses/**").hasRole("ADMIN")

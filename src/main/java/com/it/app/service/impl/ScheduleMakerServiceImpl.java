@@ -3,7 +3,6 @@ package com.it.app.service.impl;
 import com.it.app.component.LocalizedMessageSource;
 import com.it.app.model.ScheduleMaker;
 import com.it.app.repository.ScheduleMakerRepository;
-import com.it.app.service.EventService;
 import com.it.app.service.LanguageService;
 import com.it.app.service.RoleService;
 import com.it.app.service.ScheduleMakerService;
@@ -24,33 +23,39 @@ public class ScheduleMakerServiceImpl implements ScheduleMakerService {
 
     private final ScheduleMakerRepository scheduleMakerRepository;
 
-    private final EventService eventService;
-
     private final RoleService roleService;
 
     private final LanguageService languageService;
 
 
-    public ScheduleMakerServiceImpl(LocalizedMessageSource localizedMessageSource, ScheduleMakerRepository scheduleMakerRepository, EventService eventService, RoleService roleService, LanguageService languageService) {
+    public ScheduleMakerServiceImpl(LocalizedMessageSource localizedMessageSource, ScheduleMakerRepository scheduleMakerRepository, RoleService roleService, LanguageService languageService) {
         this.localizedMessageSource = localizedMessageSource;
         this.scheduleMakerRepository = scheduleMakerRepository;
-        this.eventService = eventService;
         this.roleService = roleService;
         this.languageService = languageService;
     }
 
+    /**
+     * @see ScheduleMakerService#save(ScheduleMaker)
+     */
     @Override
     public ScheduleMaker save(ScheduleMaker scheduleMaker) {
         validate(scheduleMaker.getId() != null, localizedMessageSource.getMessage("error.scheduleMaker.notHaveId", new Object[]{}));
         return saveAndFlush(scheduleMaker);
     }
 
+    /**
+     * @see ScheduleMakerService#deleteById(Long)
+     */
     @Override
     public void deleteById(Long id) {
         findById(id);
         scheduleMakerRepository.deleteById(id);
     }
 
+    /**
+     * @see ScheduleMakerService#delete(ScheduleMaker)
+     */
     @Override
     public void delete(ScheduleMaker entity) {
         final Long id = entity.getId();
@@ -59,11 +64,17 @@ public class ScheduleMakerServiceImpl implements ScheduleMakerService {
         scheduleMakerRepository.delete(entity);
     }
 
+    /**
+     * @see ScheduleMakerService#getOne(Long)
+     */
     @Override
     public ScheduleMaker getOne(Long id) {
         return scheduleMakerRepository.getOne(id);
     }
 
+    /**
+     * @see ScheduleMakerService#update(ScheduleMaker)
+     */
     @Override
     public ScheduleMaker update(ScheduleMaker scheduleMaker) {
         validate(scheduleMaker.getId() == null, localizedMessageSource.getMessage("error.scheduleMaker.haveId", new Object[]{}));
@@ -71,16 +82,25 @@ public class ScheduleMakerServiceImpl implements ScheduleMakerService {
         return saveAndFlush(scheduleMaker);
     }
 
+    /**
+     * @see ScheduleMakerService#findAll()
+     */
     @Override
     public List<ScheduleMaker> findAll() {
         return scheduleMakerRepository.findAll();
     }
 
+    /**
+     * @see ScheduleMakerService#findById(Long)
+     */
     @Override
     public ScheduleMaker findById(Long id) {
         return scheduleMakerRepository.findById(id).orElseThrow(() -> new RuntimeException(localizedMessageSource.getMessage("error.scheduleMaker.notExist", new Object[]{})));
     }
 
+    /**
+     * @see ScheduleMakerService#findAllByLanguage(String)
+     */
     @Override
     public List<ScheduleMaker> findAllByLanguage(String language) {
         return scheduleMakerRepository.findAllByLanguage(language);

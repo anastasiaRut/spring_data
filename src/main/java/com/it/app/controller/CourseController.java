@@ -40,7 +40,7 @@ public class CourseController {
     /**
      * Gets all Courses
      *
-     * @return ResponseEntity<List < CourseResponseDto>>
+     * @return ResponseEntity<List   <   CourseResponseDto>>
      */
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<CourseResponseDto>> getAll() {
