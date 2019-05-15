@@ -67,7 +67,7 @@ public class AuthenticationController {
             user = new Student();
         user.setUsername(userRegistrationRequestDto.getName());
         user.setPassword(encoder.encode(userRegistrationRequestDto.getPassword()));
-        if (role != null && !userRegistrationRequestDto.getRole().equals("ROLE_MAKER")) {
+        if (role != null && !userRegistrationRequestDto.getRole().equals("ROLE_MAKER") && !userRegistrationRequestDto.getRole().equals("ROLE_ADMIN")) {
             user.setRole(role);
         }
         return userService.save(user);
